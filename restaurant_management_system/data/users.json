@@ -1,0 +1,22 @@
+[
+    {
+        "username": "suraj",
+        "password": "singh",
+        "role": "admin"
+    },
+    {
+        "username": "kailash",
+        "password": "singh",
+        "role": "admin"
+    },
+    {
+        "username": "deepak",
+        "password": "singh",
+        "role": "client"
+    },
+    {
+        "username": "manoj",
+        "password": "singh",
+        "role": "client"
+    }
+]

@@ -1,0 +1,19 @@
+{
+    "customer_name": "John Doe",
+    "date": "2024-10-19 14:30:45",
+    "items": [
+        {
+            "name": "Burger",
+            "price": 100,
+            "quantity": 2
+        },
+        {
+            "name": "Fries",
+            "price": 50,
+            "quantity": 1
+        }
+    ],
+    "subtotal": 250,
+    "gst": 45.0,
+    "total_amount": 295.0
+}
