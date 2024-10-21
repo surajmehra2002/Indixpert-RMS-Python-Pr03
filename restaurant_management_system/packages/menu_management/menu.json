@@ -1,9 +1,0 @@
-[
-    {
-        "id": 1,
-        "name": "burger",
-        "description": "burgeris",
-        "price": 39.9,
-        "available": true
-    }
-]

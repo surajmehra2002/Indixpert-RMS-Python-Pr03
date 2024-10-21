@@ -2,8 +2,8 @@ import os,json
 
 def load_users():
     """Load users from the JSON file or initialize if the file doesn't exist or is empty."""
-    file_path = 'data/users.json'
-    dir_path = 'data'
+    file_path = 'src/data/users.json'
+    dir_path = 'src/data'
     
     # Check if the data directory exists, create it if not
     if not os.path.exists(dir_path):
@@ -26,23 +26,35 @@ def load_users():
             return None
 
 def get_user_from_db(username):
-    """Fetch a user by username from the users.json file."""
+    found = False
     users = load_users()
-    if users:
-        for user in users:
-            if user['username'] == username:
-                return user
-    return None
+    for user in users:
+        if user["username"]==username:
+            found = True
+            return user
+    if not found:
+        print("User not exist! Please Sign Up..")
+        return None
+#     if users:
+#         for user in users:
+#             if user['username'] == username:
+#                 return user
+#     return None
 
 def authenticate_user(username, password):
     """Authenticate the user by checking username and password."""
     user = get_user_from_db(username)
     
-    if user and user['password'] == password:
-        if user['role'] == 'admin':
-            return 'admin'
+    if user["password"] == password:
+        if user["role"]=="owner":
+            return "owner" 
         else:
-            return 'client'
+            return "customer"
     else:
         print("Invalid credentials")
         return None
+
+
+#         
+if __name__=="__main__":
+    print(authenticate_user("deep", "singh"))
