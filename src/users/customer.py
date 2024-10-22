@@ -1,37 +1,50 @@
-# from packages.menu_management.menu import Menu
+
+from src.packages.menu_management.menu import Menu
 # from packages.order_management.order import Order
 
 class Customer:
-    # def __init__(self, users_data):
-    #     self.users_data = users_data
-    #     self.menu = Menu()  # Initialize the Menu class to interact with menu items
-    #     self.order = Order()  # Initialize the Order class for placing orders
+    def __init__(self, user):
+        self.user = user
+        self.menu = Menu()
+        # self.order = Order()  # Initialize the Order class for placing orders
 
     def run_customer_panel(self):
         """customer control panel with options to view the menu, place an order, or exit."""
-        print("customer Panel")
+        print(f"\nWelcome {self.user["username"]}!")
         while True:
-            print("\n1. View menu")
-            print("2. Place order")
-            print("3. Add menu item")
-            print("4. Exit")
-            choice = input("Enter your choice: ")
+            enter_key = input("Press 'Enter' to show the menu")
+            if enter_key == "":
+                print("\n1. View menu")
+                print("2. Take order")
+                print("3. Update ongoing order")
+                print("4. Cancel")
+                print("5. View ongoing order")
+                print("6. Table booking")
+                print("7. Profile Information")
+                print("0. Log out")
+                choice = input("Enter your choice: ")
 
-            if choice == '1':
-                # self.view_menu()
-                pass
-            elif choice == '2':
-                # self.place_order()
-                pass
-            elif choice == '3':
-                # self.add_menu_item()
-                pass
-            elif choice == '4':
-                print("Exiting customer panel...")
-                break
-            else:
-                print("Invalid choice. Please try again.")
+                if choice == '1':
+                    self.menu.display_menu()
+                elif choice == '2':
+                    # self.place_order()
+                    pass
+                elif choice == '3':
+                    # self.add_menu_item()
+                    pass
+                elif choice == '7':
+                    self.profile_info()
+                elif choice == '0':
+                    print("Log out Successfully!\n")
+                    break
+                else:
+                    print("Invalid choice. Please try again.")
+          
 
+    def profile_info(self):
+        
+        print(f"{'Name:':<10} {self.user['username']}")
+        print(f"{'Role:':<10} {self.user['role']}")
     # def view_menu(self):
     #     """Display menu items using the Menu class from the menu management package."""
     #     # print("Displaying menu...")
@@ -79,5 +92,5 @@ class Customer:
     #     }
 
     #     self.menu.add_item(new_item)  # Call the add_item method to add the new item
-customer = Customer()
-customer.run_customer_panel()
+# customer = Customer()
+# customer.run_customer_panel()

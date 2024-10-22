@@ -1,6 +1,7 @@
 import json
 import os
 from users.authentication import authenticate_user
+from users.authentication import get_user_from_db
 # from users.authentication import authenticate_user
 # from users.owner import owner
 from users.customer import Customer
@@ -108,6 +109,7 @@ def load_users():
 #             print("Invalid choice. Please try again.")
 
 def customer_menu():
+    users = load_users()
     
     while True:
         print("\ncustomer Menu:")
@@ -121,13 +123,15 @@ def customer_menu():
             username = input("Enter your username: ")
             password = input("Enter your password: ")
             role = authenticate_user(username, password)
+            
                        
             if role == 'customer':
-                print('success')
-                customer = Customer()
+                print("Login Successfully!\n")
+                user = get_user_from_db(username)
+                customer = Customer(user)
                 customer.run_customer_panel()
-            else:
-                print("This is only for customer!")
+            elif role == 'owner':
+                print("Invalid credentials")
         # elif choice == '2':
         #     create_customer_user()
         elif choice == '3':

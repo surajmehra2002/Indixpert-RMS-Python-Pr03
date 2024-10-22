@@ -55,5 +55,5 @@ def authenticate_user(username, password):
 
 
        
-if __name__=="__main__":
-    authenticate_user("deep", "singh")
+# if __name__=="__main__":
+#     authenticate_user("deep", "singh")
