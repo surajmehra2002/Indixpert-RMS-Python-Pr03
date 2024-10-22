@@ -1,31 +1,34 @@
-# import json
-# import os
+import json
+import os
 from users.authentication import authenticate_user
 # from users.authentication import authenticate_user
 # from users.owner import owner
-# from users.customer import customer
+from users.customer import Customer
 
-# def load_users():
-#     """Load users from the JSON file or initialize if the file doesn't exist or is empty."""
-#     file_path = r'data/users.json'
+def load_users():
+    """Load users from the JSON file or initialize if the file doesn't exist or is empty."""
+    file_path = 'src/data/users.json'
+    dir_path = 'src/data'
     
-#     # Check if the file exists
-#     if not os.path.exists(file_path):
-#         print("Users file not found, creating a new one.")
-#         with open(file_path, 'w') as f:
-#             json.dump([], f)  # Initialize with an empty list
+    # Check if the data directory exists, create it if not
+    if not os.path.exists(dir_path):
+        print(f"'{dir_path}' directory not found, creating it.")
+        os.makedirs(dir_path)
+
+    # Check if the users.json file exists, create it if not
+    if not os.path.exists(file_path):
+        print("Users file not found, creating a new one.")
+        with open(file_path, 'w') as f:
+            json.dump([], f)  # Initialize with an empty list
     
-#     # Load users from the file
-#     with open(file_path, 'r') as f:
-#         try:
-#             users = json.load(f)
-#             if not users:  # If the file is empty
-#                 print("No users found in the system. Please create an owner user.")
-#                 return None
-#             return users
-#         except json.JSONDecodeError:
-#             print("Error decoding users.json. Please ensure it's a valid JSON file.")
-#             return None
+    # Load users from the file
+    with open(file_path, 'r') as f:
+        try:
+            users = json.load(f)
+            return users
+        except json.JSONDecodeError:
+            print("Error decoding users.json. Please ensure it's a valid JSON file.")
+            return None
 
 # def save_user(user_data):
 #     """Save the new user to users.json."""
@@ -105,6 +108,7 @@ from users.authentication import authenticate_user
 #             print("Invalid choice. Please try again.")
 
 def customer_menu():
+    
     while True:
         print("\ncustomer Menu:")
         print("1. Login")
@@ -117,15 +121,17 @@ def customer_menu():
             username = input("Enter your username: ")
             password = input("Enter your password: ")
             role = authenticate_user(username, password)
-            print(role)
-            
-        #     if role == 'customer':
-        #         customer = customer(users_data)
-        #         customer.run_customer_panel()
+                       
+            if role == 'customer':
+                print('success')
+                customer = Customer()
+                customer.run_customer_panel()
+            else:
+                print("This is only for customer!")
         # elif choice == '2':
         #     create_customer_user()
-        # elif choice == '3':
-        #     break
+        elif choice == '3':
+            break
         # else:
         #     print("Invalid choice. Please try again.")
 

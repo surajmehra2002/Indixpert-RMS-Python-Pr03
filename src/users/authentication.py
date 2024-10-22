@@ -25,6 +25,7 @@ def load_users():
             print("Error decoding users.json. Please ensure it's a valid JSON file.")
             return None
 
+
 def get_user_from_db(username):
     found = False
     users = load_users()
@@ -34,27 +35,25 @@ def get_user_from_db(username):
             return user
     if not found:
         print("User not exist! Please Sign Up..")
-        return None
-#     if users:
-#         for user in users:
-#             if user['username'] == username:
-#                 return user
-#     return None
+       
+       
+
 
 def authenticate_user(username, password):
     """Authenticate the user by checking username and password."""
     user = get_user_from_db(username)
     
-    if user["password"] == password:
-        if user["role"]=="owner":
-            return "owner" 
+    if user is not None:    
+        if user["password"] == password:
+            if user["role"]=="owner":
+                return "owner" 
+            else:
+                return "customer"
         else:
-            return "customer"
-    else:
-        print("Invalid credentials")
-        return None
+            print("Invalid credentials")
+            
 
 
-#         
+       
 if __name__=="__main__":
-    print(authenticate_user("deep", "singh"))
+    authenticate_user("deep", "singh")
