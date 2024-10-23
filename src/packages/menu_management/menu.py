@@ -11,8 +11,12 @@ class Menu:
     def load_menu(self):
         """Load menu items from the JSON file."""
         if os.path.exists(self.menu_file):
-            with open(self.menu_file, 'r') as file:
-                self.items = json.load(file)
+            try:
+                with open(self.menu_file, 'r') as file:
+                    self.items = json.load(file)
+            except:
+                print("menu item not available")
+                self.items = []
         else:
             self.items = []
         return self.items

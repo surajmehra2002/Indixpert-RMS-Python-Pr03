@@ -1,10 +1,14 @@
 import json
 import os
+import uuid
 from users.authentication import authenticate_user
 from users.authentication import get_user_from_db
 # from users.authentication import authenticate_user
 # from users.owner import owner
 from users.customer import Customer
+
+def generate_id():
+    return str(uuid.uuid4())[0:8]
 
 def load_users():
     """Load users from the JSON file or initialize if the file doesn't exist or is empty."""
@@ -31,27 +35,21 @@ def load_users():
             print("Error decoding users.json. Please ensure it's a valid JSON file.")
             return None
 
-# def save_user(user_data):
-#     """Save the new user to users.json."""
-#     file_path = 'data/users.json'
-    
-#     # Check if the file is empty or contains invalid data
-#     if os.path.getsize(file_path) == 0:
-#         users = []  # If the file is empty, initialize an empty list
-#     else:
-#         with open(file_path, 'r+') as f:
-#             try:
-#                 users = json.load(f)
-#             except json.JSONDecodeError:
-#                 print("Error reading users.json. Initializing with an empty list.")
-#                 users = []
-    
-#     # Append the new user data to the list
-#     users.append(user_data)
-    
-#     # Save the updated list of users back to the file
-#     with open(file_path, 'w') as f:
-#         json.dump(users, f, indent=4)
+def save_user(user_data):
+    """Save the new user to users.json."""
+    file_path = 'src/data/users.json'
+
+    if os.path.exists(file_path):
+        try:
+            with open(file_path, "r") as file:
+                users = json.load(file)
+        except json.JSONDecodeError:
+            print("Error reading users.json. Initializing with an empty list.")    
+            users = []
+        users.append(user_data)
+        with open(file_path, 'w') as file:
+            json.dump(users, file, indent=4)
+ 
 
 
 # def create_owner_user():
@@ -68,22 +66,34 @@ def load_users():
     
 #     save_user(owner_user)
 #     print("owner user created successfully!")
-
-# def create_customer_user():
-#     """Create the first owner user if no users exist."""
-#     print("Creating a new customer user.")
-#     username = input("Enter customer username: ")
-#     password = input("Enter customer password: ")
+def user_email():
+    import re
+    email = input("Enter customer Email: ").strip() 
+    email_regex = r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'
+    if re.match(email_regex, email):
+        return email
+    else:
+        print("\n invalid email address")
+        return user_email()
     
-#     customer_user = {
-#         "username": username,
-#         "password": password,
-#         "role": "customer"
-#     }
+def create_customer_user():
+    """Create the first owner user if no users exist."""
+    print("Creating a new customer user.")
+    username = input("Enter customer username: ").strip()
+    email = user_email()
+    password = input("Enter customer password: ").strip()
     
-#     save_user(customer_user)
-#     print("customer user created successfully!")
-#     return customer_user
+    customer_user = {
+        "id": generate_id(),
+        "username": username,
+        "user_email": email,
+        "password": password,
+        "role": "customer"
+    }
+    
+    save_user(customer_user)
+    print("customer user created successfully!")
+    return customer_user
 
 # def owner_menu(users_data):
 #     while True:
@@ -132,8 +142,8 @@ def customer_menu():
                 customer.run_customer_panel()
             elif role == 'owner':
                 print("Invalid credentials")
-        # elif choice == '2':
-        #     create_customer_user()
+        elif choice == '2':
+            create_customer_user()
         elif choice == '3':
             break
         # else:
