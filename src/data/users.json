@@ -1,0 +1,16 @@
+[
+    {
+        "id": "68701472",
+        "username": "sdf",
+        "user_email": "sdf@sdf.com",
+        "password": "sdf",
+        "role": "customer"
+    },
+    {
+        "id": "6d30803b",
+        "username": "suraj",
+        "user_email": "suraj@gmail.com",
+        "password": "suraj",
+        "role": "customer"
+    }
+]

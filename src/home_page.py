@@ -13,27 +13,24 @@ def generate_id():
 def load_users():
     """Load users from the JSON file or initialize if the file doesn't exist or is empty."""
     file_path = 'src/data/users.json'
-    dir_path = 'src/data'
-    
-    # Check if the data directory exists, create it if not
-    if not os.path.exists(dir_path):
-        print(f"'{dir_path}' directory not found, creating it.")
-        os.makedirs(dir_path)
-
-    # Check if the users.json file exists, create it if not
-    if not os.path.exists(file_path):
+    # dir_path = 'src/data'
+    if os.path.exists(file_path):
+        print('found')
+        with open(file_path, 'r') as f:
+            try:
+                users = json.load(f)
+                return users
+            except json.JSONDecodeError:
+                # print("Error decoding users.json. Please ensure it's a valid JSON file.")
+                return None
+    else:
+        print('notfound')
         print("Users file not found, creating a new one.")
         with open(file_path, 'w') as f:
             json.dump([], f)  # Initialize with an empty list
+
+  
     
-    # Load users from the file
-    with open(file_path, 'r') as f:
-        try:
-            users = json.load(f)
-            return users
-        except json.JSONDecodeError:
-            print("Error decoding users.json. Please ensure it's a valid JSON file.")
-            return None
 
 def save_user(user_data):
     """Save the new user to users.json."""
@@ -43,12 +40,23 @@ def save_user(user_data):
         try:
             with open(file_path, "r") as file:
                 users = json.load(file)
-        except json.JSONDecodeError:
-            print("Error reading users.json. Initializing with an empty list.")    
+            
+        except json.JSONDecodeError:   
             users = []
-        users.append(user_data)
-        with open(file_path, 'w') as file:
-            json.dump(users, file, indent=4)
+
+        found = False
+
+        for user in users:
+            if user_data["user_email"]==user["user_email"]:
+                found = True
+            
+        if found:   
+            print("User already exists")
+        else:
+            users.append(user_data)
+            with open(file_path, 'w') as file:
+                json.dump(users, file, indent=4)
+            print("customer user created successfully!")
  
 
 
@@ -79,10 +87,19 @@ def user_email():
 def create_customer_user():
     """Create the first owner user if no users exist."""
     print("Creating a new customer user.")
-    username = input("Enter customer username: ").strip()
+    while True:
+            username = input("Enter your username: ").strip()
+            if username != "":
+                break
+            else:
+                print("username can't empty")
     email = user_email()
-    password = input("Enter customer password: ").strip()
-    
+    while True:
+            password = input("Enter your password: ").strip()
+            if password != "":
+                break
+            else:
+                print("password can't empty")
     customer_user = {
         "id": generate_id(),
         "username": username,
@@ -92,7 +109,7 @@ def create_customer_user():
     }
     
     save_user(customer_user)
-    print("customer user created successfully!")
+    
     return customer_user
 
 # def owner_menu(users_data):
@@ -119,7 +136,7 @@ def create_customer_user():
 #             print("Invalid choice. Please try again.")
 
 def customer_menu():
-    users = load_users()
+    # users = load_users()
     
     while True:
         print("\ncustomer Menu:")
@@ -167,7 +184,6 @@ def main_menu():
             #     users_data = [first_owner]
             # owner_menu(users_data)
         elif choice == '2':
-            # users_data = load_users()
             customer_menu()
         elif choice == '3':
             print("Exiting the system. Thank you!")
