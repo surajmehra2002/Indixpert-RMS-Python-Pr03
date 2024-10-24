@@ -4,7 +4,7 @@ import uuid
 from users.authentication import authenticate_user
 from users.authentication import get_user_from_db
 # from users.authentication import authenticate_user
-# from users.owner import owner
+# from users.admin import admin
 from users.customer import Customer
 
 def generate_id():
@@ -60,20 +60,20 @@ def save_user(user_data):
  
 
 
-# def create_owner_user():
-#     """Create the first owner user if no users exist."""
-#     print("Creating a new owner user.")
-#     username = input("Enter owner username: ")
-#     password = input("Enter owner password: ")
+# def create_admin_user():
+#     """Create the first admin user if no users exist."""
+#     print("Creating a new admin user.")
+#     username = input("Enter admin username: ")
+#     password = input("Enter admin password: ")
     
-#     owner_user = {
+#     admin_user = {
 #         "username": username,
 #         "password": password,
-#         "role": "owner"
+#         "role": "admin"
 #     }
     
-#     save_user(owner_user)
-#     print("owner user created successfully!")
+#     save_user(admin_user)
+#     print("admin user created successfully!")
 def user_email():
     import re
     email = input("Enter customer Email: ").strip() 
@@ -85,7 +85,7 @@ def user_email():
         return user_email()
     
 def create_customer_user():
-    """Create the first owner user if no users exist."""
+    """Create the first admin user if no users exist."""
     print("Creating a new customer user.")
     while True:
             username = input("Enter your username: ").strip()
@@ -112,9 +112,9 @@ def create_customer_user():
     
     return customer_user
 
-# def owner_menu(users_data):
+# def admin_menu(users_data):
 #     while True:
-#         print("\nowner Menu:")
+#         print("\nadmin Menu:")
 #         print("1. Login")
 #         print("2. Sign Up")
 #         print("3. Back")
@@ -125,11 +125,11 @@ def create_customer_user():
 #             username = input("Enter your username: ")
 #             password = input("Enter your password: ")
 #             role = authenticate_user(username, password)
-#             if role == 'owner':
-#                 owner = owner(users_data)
-#                 owner.run_owner_panel()
+#             if role == 'admin':
+#                 admin = admin(users_data)
+#                 admin.run_admin_panel()
 #         elif choice == '2':
-#             create_owner_user()
+#             create_admin_user()
 #         elif choice == '3':
 #             break
 #         else:
@@ -157,7 +157,7 @@ def customer_menu():
                 user = get_user_from_db(username)
                 customer = Customer(user)
                 customer.run_customer_panel()
-            elif role == 'owner':
+            elif role == 'admin':
                 print("Invalid credentials")
         elif choice == '2':
             create_customer_user()
@@ -167,10 +167,10 @@ def customer_menu():
         #     print("Invalid choice. Please try again.")
 
 def main_menu():
-    """Main menu to choose between owner, customer, or Exit."""
+    """Main menu to choose between admin, customer, or Exit."""
     while True:
         print("\nWelcome to the Restaurant Management System")
-        print("1. owner")
+        print("1. admin")
         print("2. customer")
         print("3. Exit")
         
@@ -180,9 +180,9 @@ def main_menu():
             pass
             # users_data = load_users()
             # if users_data is None:
-            #     first_owner = create_owner_user()
-            #     users_data = [first_owner]
-            # owner_menu(users_data)
+            #     first_admin = create_admin_user()
+            #     users_data = [first_admin]
+            # admin_menu(users_data)
         elif choice == '2':
             customer_menu()
         elif choice == '3':
