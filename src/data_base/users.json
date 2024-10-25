@@ -1,0 +1,34 @@
+[
+    {
+        "id": "31b14f4f",
+        "username": "suraj",
+        "user_email": "suraj@gmail.com",
+        "password": "surajsingh",
+        "mobile": 9634912165,
+        "role": "customer"
+    },
+    {
+        "id": "ed5f463d",
+        "username": "manoj",
+        "user_email": "manoj@gmail.com",
+        "password": "manojsingh",
+        "mobile": 8077414663,
+        "role": "admin"
+    },
+    {
+        "id": "7586d2c1",
+        "username": "deepak",
+        "user_email": "deepak@gmail.com",
+        "password": "d",
+        "mobile": "9876543210",
+        "role": "customer"
+    },
+    {
+        "id": "bef2da0a",
+        "username": "deep",
+        "user_email": "dp@gmail.com",
+        "password": "deep",
+        "mobile": "2435234432",
+        "role": "customer"
+    }
+]

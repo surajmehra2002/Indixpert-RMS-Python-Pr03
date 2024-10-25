@@ -1,40 +1,39 @@
 import json
 import os
 import uuid
-from users.authentication import authenticate_user
-from users.authentication import get_user_from_db
-# from users.authentication import authenticate_user
-# from users.admin import admin
-from users.customer import Customer
+
+# importing method
+from src.models.authentication import authenticate_user
+from src.models.authentication import get_user_from_db
+from src.models.json_files_path import get_users_json
+
+# importing class
+from src.models.customer import Customer
 
 def generate_id():
     return str(uuid.uuid4())[0:8]
 
-def load_users():
-    """Load users from the JSON file or initialize if the file doesn't exist or is empty."""
-    file_path = 'src/data/users.json'
-    # dir_path = 'src/data'
-    if os.path.exists(file_path):
-        print('found')
-        with open(file_path, 'r') as f:
-            try:
-                users = json.load(f)
-                return users
-            except json.JSONDecodeError:
-                # print("Error decoding users.json. Please ensure it's a valid JSON file.")
-                return None
-    else:
-        print('notfound')
-        print("Users file not found, creating a new one.")
-        with open(file_path, 'w') as f:
-            json.dump([], f)  # Initialize with an empty list
+# def load_users():
+#     file_path = get_users_json()
+#     if os.path.exists(file_path):
+#         print('found')
+#         with open(file_path, 'r') as f:
+#             try:
+#                 users = json.load(f)
+#                 return users
+#             except json.JSONDecodeError:
+#                 return None
+#     else:
+#         print('notfound')
+#         print("Users file not found, creating a new one.")
+#         with open(file_path, 'w') as f:
+#             json.dump([], f)  # Initialize with an empty list
 
   
     
 
 def save_user(user_data):
-    """Save the new user to users.json."""
-    file_path = 'src/data/users.json'
+    file_path = get_users_json()
 
     if os.path.exists(file_path):
         try:
@@ -56,8 +55,9 @@ def save_user(user_data):
             users.append(user_data)
             with open(file_path, 'w') as file:
                 json.dump(users, file, indent=4)
-            print("customer user created successfully!")
- 
+          
+            print(f"successfully {user_data["role"]} account created!")
+           
 
 
 # def create_admin_user():
@@ -74,6 +74,8 @@ def save_user(user_data):
     
 #     save_user(admin_user)
 #     print("admin user created successfully!")
+
+
 def user_email():
     import re
     email = input("Enter customer Email: ").strip() 
@@ -81,31 +83,67 @@ def user_email():
     if re.match(email_regex, email):
         return email
     else:
-        print("\n invalid email address")
+        print("invalid email address")
         return user_email()
     
-def create_customer_user():
-    """Create the first admin user if no users exist."""
-    print("Creating a new customer user.")
+def user_name():
     while True:
             username = input("Enter your username: ").strip()
             if username != "":
                 break
             else:
                 print("username can't empty")
-    email = user_email()
+    return username
+
+def user_password():
     while True:
             password = input("Enter your password: ").strip()
             if password != "":
                 break
             else:
                 print("password can't empty")
+    return password
+
+def user_mobile_no():
+    while True:
+        try:
+            mobile = input("Enter your mobile number: ")
+            
+            # Check if the input is a digit and is exactly 10 digits long
+            if len(mobile) == 10 and mobile.isdigit():
+                return int(mobile)  # Loop breaks here when a valid number is entered
+            else:
+                print("Error: Mobile number must be exactly 10 digits.")
+        
+        except ValueError:
+            print("Error: Invalid input. Please enter only digits.")
+
+def user_role():
+    
+    while True:
+            conform = input("Are you admin (y/n)").strip().upper()
+            if conform == "Y":
+                role = "admin"
+                break
+            elif conform == "N":
+                role = "customer"
+                break
+            else:
+                print("Please enter valid input")  
+    return role
+            
+
+
+def create_customer_user():
+    print("Creating a new user.")
+
     customer_user = {
         "id": generate_id(),
-        "username": username,
-        "user_email": email,
-        "password": password,
-        "role": "customer"
+        "username": user_name(),
+        "user_email": user_email(),
+        "password": user_password(),
+        "mobile": user_mobile_no(),
+        "role": user_role()
     }
     
     save_user(customer_user)
@@ -135,61 +173,40 @@ def create_customer_user():
 #         else:
 #             print("Invalid choice. Please try again.")
 
-def customer_menu():
-    # users = load_users()
-    
-    while True:
-        print("\ncustomer Menu:")
-        print("1. Login")
-        print("2. Sign Up")
-        print("3. Back")
-        
-        choice = input("Enter your choice: ")
-        
-        if choice == '1':
-            username = input("Enter your username: ")
-            password = input("Enter your password: ")
-            role = authenticate_user(username, password)
-            
+
+def login_users():
+    username = input("Enter your username: ")
+    password = input("Enter your password: ")
+    role = authenticate_user(username, password)           
                        
-            if role == 'customer':
+    if role == 'customer':
                 print("Login Successfully!\n")
                 user = get_user_from_db(username)
                 customer = Customer(user)
                 customer.run_customer_panel()
-            elif role == 'admin':
-                print("Invalid credentials")
-        elif choice == '2':
-            create_customer_user()
-        elif choice == '3':
-            break
-        # else:
-        #     print("Invalid choice. Please try again.")
+    elif role == 'admin':
+                print("You are admin ")
 
 def main_menu():
     """Main menu to choose between admin, customer, or Exit."""
+    print("\n==============* Welcome to the Restaurant Management System *==================")
     while True:
-        print("\nWelcome to the Restaurant Management System")
-        print("1. admin")
-        print("2. customer")
+        
+        print("1. Login")
+        print("2. Sign Up")
         print("3. Exit")
         
         choice = input("Enter your choice: ")
         
         if choice == '1':
-            pass
-            # users_data = load_users()
-            # if users_data is None:
-            #     first_admin = create_admin_user()
-            #     users_data = [first_admin]
-            # admin_menu(users_data)
+            login_users()            
         elif choice == '2':
-            customer_menu()
+            create_customer_user()
         elif choice == '3':
             print("Exiting the system. Thank you!")
             break
         else:
             print("Invalid choice. Please try again.")
 
-if __name__==  "__main__":
-    main_menu()
+# if __name__==  "__main__":
+#     main_menu()

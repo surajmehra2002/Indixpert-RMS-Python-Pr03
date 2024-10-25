@@ -71,7 +71,7 @@ class Order:
             }
 
             folder_name = f"{self.user['username']}_{self.user['id']}"
-            file_path = f"S:/indixpert_coaching/python/python_project/Indixpert-RMS-Python-Pr03/src/data/customers/{folder_name}/invoice_{invoice_id}.json"
+            file_path = f"src/data_base/customers/{folder_name}/invoice_{invoice_id}.json"
 
             os.makedirs(os.path.dirname(file_path), exist_ok=True)
 

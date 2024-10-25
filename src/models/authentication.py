@@ -1,9 +1,9 @@
 import os,json
+from src.models.json_files_path import get_users_json
 
 def load_users():
     """Load users from the JSON file or initialize if the file doesn't exist or is empty."""
-    file_path = 'src/data/users.json'
-    # dir_path = 'src/data'
+    file_path = get_users_json()
     if os.path.exists(file_path):
        
         with open(file_path, 'r') as f:
@@ -38,8 +38,8 @@ def authenticate_user(username, password):
     
     if user is not None:    
         if user["password"] == password:
-            if user["role"]=="owner":
-                return "owner" 
+            if user["role"]=="admin":
+                return "admin" 
             else:
                 return "customer"
         else:

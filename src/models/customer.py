@@ -26,7 +26,6 @@ class Customer:
                 if choice == '1':
                     self.menu.display_menu()
                 elif choice == '2':
-                    user = self.user
                     self.order.take_order()
                 elif choice == '3':
                     # self.add_menu_item()
@@ -42,9 +41,10 @@ class Customer:
 
     def profile_info(self):
         
-        print(f"{'User_id:':<10} {self.user['id']}")
-        print(f"{'Name:':<10} {self.user['username']}")
+        print(f"{'\nUser_id:':<10} {self.user['id']}")
+        print(f"{'Username:':<10} {self.user['username']}")
         print(f"{'Email:':<10} {self.user['user_email']}")
+        print(f"{'mobile:':<10} {self.user['mobile']}")
         print(f"{'Role:':<10} {self.user['role']}")
     
     def place_order(self):
