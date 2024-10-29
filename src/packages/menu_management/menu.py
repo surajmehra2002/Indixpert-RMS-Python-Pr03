@@ -3,9 +3,11 @@
 import json
 import os
 
+from src.models.json_files_path import get_menu_json
+
 class Menu:
-    def __init__(self, menu_file = '../../data/menu.json'):
-        self.menu_file = os.path.join(os.path.dirname(__file__), menu_file)
+    def __init__(self):
+        self.menu_file = get_menu_json()
         self.items = self.load_menu()
 
     def load_menu(self):
@@ -26,51 +28,12 @@ class Menu:
 
             if len(self.items)>0:        
                 print("\n********Display all menu items.**********")
-                print(f"{'Name':<20} {'Price':<10}")  # Header
-                print("-" * 27)  
+                print(f"{'Item Id':<20} {'Name':<25} {'Category':<20} {'Price':<20} {'Description':<20} {'Availablity':<20} ")  # Header
+                print("-" * 125)  
             
                 for item in self.items:
-                    print(f"{item['Name']:<20} {item['Price']:<10}")
+                    print(f"{item['item_id']:<20} {item['name']:<25} {item['category']:<20} {item['price']:<20} {item['description']} {item['availability']}")
             else:
                 print("menu item not available")
 
-    # def update_item(self, item_id, updated_item):
-    #     """Update an existing menu item."""
-    #     for index, item in enumerate(self.items):
-    #         if item['id'] == item_id:
-    #             self.items[index] = updated_item
-    #             self.save_menu()  # Save changes to the file
-    #             print(f"Menu item '{item_id}' updated successfully!")
-    #             return
-    #     print(f"Menu item with ID '{item_id}' not found!")
-
-    # def delete_item(self, item_id):
-    #     """Delete a menu item."""
-    #     for index, item in enumerate(self.items):
-    #         if item['id'] == item_id:
-    #             del self.items[index]
-    #             self.save_menu()  # Save changes to the file
-    #             print(f"Menu item '{item_id}' deleted successfully!")
-    #             return
-    #     print(f"Menu item with ID '{item_id}' not found!")
-
-    
-# # Example usage
-# if __name__ == "__main__":
-#     menu_manager = Menu()
-
-#     # Sample menu item to add
-#     new_item = {
-#         "id": 1,
-#         "name": "Pizza",
-#         "description": "Delicious cheese pizza",
-#         "price": 12.99,
-#         "available": True
-#     }
-    
-#     menu_manager.add_item(new_item)  # Add the item to the menu
-#     menu_manager.display_menu()  # Display the menu
-
-# if __name__ == "__main__":
-#     menu = Menu()
-#     menu.display_menu()
+   

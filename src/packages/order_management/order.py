@@ -3,10 +3,13 @@ import os
 import random
 from datetime import datetime
 
+from src.models.json_files_path import get_menu_json
+
 class Order:
     def __init__(self, user):
         self.user = user
         self.orders = []  # List to store all orders
+        self.menu = get_menu_json()
         self.gst_rate = 0.18  # 18% GST
 
 
