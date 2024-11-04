@@ -3,25 +3,11 @@
 import json
 import os
 
-from src.models.json_files_path import get_menu_json
+from src.models.json_files_path import load_menu
 
 class Menu:
     def __init__(self):
-        self.menu_file = get_menu_json()
-        self.items = self.load_menu()
-
-    def load_menu(self):
-        """Load menu items from the JSON file."""
-        if os.path.exists(self.menu_file):
-            try:
-                with open(self.menu_file, 'r') as file:
-                    self.items = json.load(file)
-            except:
-                print("menu item not available")
-                self.items = []
-        else:
-            self.items = []
-        return self.items
+        self.items = load_menu()   
 
 
     def display_menu(self):

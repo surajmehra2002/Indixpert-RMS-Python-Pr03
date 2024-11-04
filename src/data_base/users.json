@@ -1,34 +1,26 @@
 [
     {
-        "id": "31b14f4f",
+        "id": "76ffc6d6",
         "username": "suraj",
         "user_email": "suraj@gmail.com",
-        "password": "surajsingh",
-        "mobile": 9634912165,
+        "password": "Suraj123",
+        "mobile": 2222222222,
         "role": "customer"
     },
     {
-        "id": "ed5f463d",
+        "id": "2e5bb775",
         "username": "manoj",
-        "user_email": "manoj@gmail.com",
-        "password": "manojsingh",
-        "mobile": 8077414663,
+        "user_email": "maonj@gmail.com",
+        "password": "manoj",
+        "mobile": 3333333333,
+        "role": "customer"
+    },
+    {
+        "id": "194525c1",
+        "username": "kailash",
+        "user_email": "kailash@gmail.com",
+        "password": "kailash123",
+        "mobile": 9999999999,
         "role": "admin"
-    },
-    {
-        "id": "7586d2c1",
-        "username": "deepak",
-        "user_email": "deepak@gmail.com",
-        "password": "d",
-        "mobile": "9876543210",
-        "role": "customer"
-    },
-    {
-        "id": "bef2da0a",
-        "username": "deep",
-        "user_email": "dp@gmail.com",
-        "password": "deep",
-        "mobile": "2435234432",
-        "role": "customer"
     }
 ]

@@ -1,0 +1,32 @@
+{
+    "order_id": "401-7102-3915",
+    "date": "2024-11-04",
+    "time": "15:34",
+    "customer_details": {
+        "customer_id": "76ffc6d6",
+        "name": "suraj",
+        "email": "suraj@gmail.com",
+        "role": "customer"
+    },
+    "items": [
+        {
+            "item_id": "M012",
+            "name": "Buffalo Wings",
+            "quantity": 10,
+            "price_per_unit": 8.99,
+            "total_price": 89
+        },
+        {
+            "item_id": "M008",
+            "name": "Spaghetti Bolognese",
+            "quantity": 12,
+            "price_per_unit": 12.99,
+            "total_price": 155
+        }
+    ],
+    "sub_total": 244,
+    "gst_percentage": 18,
+    "gst_amount": 43.92,
+    "grand_total": 287.92,
+    "status": "Ordered"
+}

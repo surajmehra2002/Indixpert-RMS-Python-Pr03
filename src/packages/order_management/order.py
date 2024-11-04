@@ -3,38 +3,82 @@ import os
 import random
 from datetime import datetime
 
-from src.models.json_files_path import get_menu_json
+from src.models.json_files_path import load_menu
+from src.models.animation import loading
 
 class Order:
     def __init__(self, user):
         self.user = user
-        self.orders = []  # List to store all orders
-        self.menu = get_menu_json()
-        self.gst_rate = 0.18  # 18% GST
-
+        self.orders = []
+        self.menu = load_menu()
+        self.gst_rate = 0.18
 
     def calculate_price_with_gst(self, price):
         return price + (price * self.gst_rate)
 
     def generate_invoice_id(self):
-        random_number = random.randint(1000, 9999)
-        return "INV"+str(random_number) 
+        return "401-" + str(random.randint(1000, 9999)) + "-" + str(random.randint(1000, 9999))
 
     def take_order(self):
-        order_name = input("Enter order name: ")
-        quantity = int(input("Enter quantity: "))
+        print("Available items:")
+        for item in self.menu:
+            print(f"{item['name']} - ₹{item['price']}")
 
-        base_price = 100  # Example base price for each order
-        total_price = base_price * quantity
-        total_price_with_gst = self.calculate_price_with_gst(total_price)
+        items = []
+        add_more = 'y'
 
-        print(f"The total price including GST is: ₹{total_price_with_gst:.2f}")
+        while add_more.lower() == 'y':
+            order_name = input("Enter the name of the item you'd like to order: ").strip().lower()
+            ordered_item = [item for item in self.menu if order_name in item['name'].lower()]
 
-        confirmation = input("Are you sure you want to take the order? (Y/N): ")
+            if not ordered_item:
+                print("Item not available. Please select an item from the available menu.")
+                continue
+
+            print("Searching...", end="")
+            loading()
+            print("\nAvailable items: ")
+            print(f"{'Name':<20} {'Price':<20}")
+            for item in ordered_item:
+                print(f"{item['name']:<20} {item['price']:<20}")
+
+            if len(ordered_item) == 1:
+                selected_item = ordered_item[0]
+                if not selected_item['availability']:
+                    print("Sorry, this item is currently unavailable.")
+                    continue
+
+                confirm = input("Is this the item you'd like to order? (y/n): ").strip().lower()
+                if confirm != 'y':
+                    continue
+            else:
+                print("Multiple items found. Choose one item")
+                continue
+
+            quantity = int(input("Enter quantity: "))
+            base_price = selected_item['price']
+            total_price = base_price * quantity
+
+            items.append({
+                "item_id": selected_item["item_id"],
+                "name": selected_item['name'],
+                "quantity": quantity,
+                "price_per_unit": base_price,
+                "total_price": int(total_price)
+            })
+
+            add_more = input("Would you like to order another item? (y/n): ").strip().lower()
+
+        sub_total = sum(item['total_price'] for item in items)
+        gst_percentage = 18
+        gst_amount = (sub_total * gst_percentage) / 100
+        grand_total = sub_total + gst_amount
+
+        print(f"The total price including GST is: ₹{grand_total:.2f}")
+        confirmation = input("Are you sure you want to place the order? (Y/N): ")
 
         if confirmation.upper() == 'Y':
-            # Step 4: Generate the invoice and save it to a JSON file
-            invoice_id = self.generate_invoice_id()
+            order_id = self.generate_invoice_id()
             date_now = datetime.now().strftime('%Y-%m-%d')
             time_now = datetime.now().strftime('%H:%M')
             customer_details = {
@@ -44,24 +88,8 @@ class Order:
                 "role": self.user["role"]
             }
 
-            # Creating order item details
-            items = [
-                {
-                    "item_id": "ITEM001",
-                    "name": order_name,
-                    "quantity": quantity,
-                    "price_per_unit": base_price,
-                    "total_price": total_price
-                }
-            ]
-
-            sub_total = total_price
-            gst_percentage = 5  # Example GST percentage
-            gst_amount = (sub_total * gst_percentage) / 100
-            grand_total = sub_total + gst_amount
-
             invoice_data = {
-                "invoice_id": invoice_id,
+                "order_id": order_id,
                 "date": date_now,
                 "time": time_now,
                 "customer_details": customer_details,
@@ -70,15 +98,13 @@ class Order:
                 "gst_percentage": gst_percentage,
                 "gst_amount": gst_amount,
                 "grand_total": grand_total,
-                "status": "Paid"
+                "status": "Ordered"
             }
 
             folder_name = f"{self.user['username']}_{self.user['id']}"
-            file_path = f"src/data_base/customers/{folder_name}/invoice_{invoice_id}.json"
+            file_path = f"src/data_base/customers/{folder_name}/invoice_{order_id}.json"
 
             os.makedirs(os.path.dirname(file_path), exist_ok=True)
-
-         
             with open(file_path, 'w') as invoice_file:
                 json.dump(invoice_data, invoice_file, indent=4)
 
@@ -86,36 +112,3 @@ class Order:
             print("Order placed successfully!")
         else:
             print("Order cancelled.")
-    def update_order(self):
-        print("update")
-
-    def cancel_order():
-        print("cancel")
-
-    def display_orders(self):
-        print("display")
-        # """Display all orders placed."""
-        # if not self.orders:
-        #     print("No orders placed.")
-        # else:
-        #     print("Current Orders:")
-        #     for index, order in enumerate(self.orders):
-        #         print(f"{index + 1}. Item: {order['item_name']}, Quantity: {order['quantity']}")
-
-# # Example usage
-# if __name__ == "__main__":
-#     order_manager = Order({
-#         "id": "6d30803b",
-#         "username": "suraj",
-#         "user_email": "suraj@gmail.com",
-#         "password": "suraj",
-#         "role": "customer"
-#     })
-#     order_manager.take_order()
-    
-#     # Sample order placement
-#     order_manager.add_order("Pizza", 2)
-#     order_manager.add_order("Burger", 1)
-    
-#     # Display all orders
-#     order_manager.display_orders()

@@ -1,0 +1,25 @@
+{
+    "order_id": "401-6788-2001",
+    "date": "2024-11-04",
+    "time": "12:25",
+    "customer_details": {
+        "customer_id": "88fad118",
+        "name": "Raksh12",
+        "email": "Rakesh@out.com",
+        "role": "customer"
+    },
+    "items": [
+        {
+            "item_id": "M016",
+            "name": "Apple Pie",
+            "quantity": 3,
+            "price_per_unit": 4.99,
+            "total_price": 14
+        }
+    ],
+    "sub_total": 14,
+    "gst_percentage": 18,
+    "gst_amount": 2.52,
+    "grand_total": 16.52,
+    "status": "Ordered"
+}

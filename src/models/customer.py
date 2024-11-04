@@ -10,38 +10,37 @@ class Customer:
 
     def run_customer_panel(self):
         """customer control panel with options to view the menu, place an order, or exit."""
-        print(f"\nWelcome {self.user["username"]}!")
+        print(f"\n******** Welcome {self.user["username"]}! ********")
         while True:
-            enter_key = input("Press 'Enter' to show the menu")
-            if enter_key == "":
-                print("\n1. View menu")
-                print("2. Take new order")
-                print("5. View ongoing order")
-                print("5. Cancel order")
-                print("5. Payment history")
-                print("7. Profile Information")
-                print("0. Log out")
-                choice = input("Enter your choice: ")
-
-                if choice == '1':
-                    self.menu.display_menu()
-                elif choice == '2':
-                    self.order.take_order()
-                elif choice == '3':
-                    # self.add_menu_item()
-                    pass
-                elif choice == '7':
-                    self.profile_info()
-                elif choice == '0':
-                    print("Log out Successfully!\n")
-                    break
-                else:
-                    print("Invalid choice. Please try again.")
+            # enter_key = input("Press 'Enter' to show the menu")
+            # if enter_key == "":
+            print("\n1. View menu")
+            print("2. Take new order")
+            print("3. View ongoing order")
+            print("4. Cancel order")
+            print("5. Payment history")
+            print("7. Profile Information")
+            print("0. Log out")
+            choice = input("Enter your choice: ")
+            if choice == '1':
+                self.menu.display_menu()
+            elif choice == '2':
+                self.order.take_order()
+            elif choice == '3':
+                # self.add_menu_item()
+                pass
+            elif choice == '7':
+                self.profile_info()
+            elif choice == '0':
+                print("Log out Successfully!\n")
+                break
+            else:
+                print("Invalid choice. Please try again.")
           
 
     def profile_info(self):
         
-        print(f"{'\nUser_id:':<10} {self.user['id']}")
+        print(f"{'\n User_id:':<10} {self.user['id']}")
         print(f"{'Username:':<10} {self.user['username']}")
         print(f"{'Email:':<10} {self.user['user_email']}")
         print(f"{'mobile:':<10} {self.user['mobile']}")

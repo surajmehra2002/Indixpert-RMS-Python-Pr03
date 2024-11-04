@@ -5,58 +5,31 @@ import uuid
 # importing method
 from src.models.authentication import authenticate_user
 from src.models.authentication import get_user_from_db
-from src.models.json_files_path import get_users_json
+from src.models.json_files_path import load_users
+from src.models.json_files_path import save_user_when_signup
 
 # importing class
 from src.models.customer import Customer
 
 def generate_id():
     return str(uuid.uuid4())[0:8]
-
-# def load_users():
-#     file_path = get_users_json()
-#     if os.path.exists(file_path):
-#         print('found')
-#         with open(file_path, 'r') as f:
-#             try:
-#                 users = json.load(f)
-#                 return users
-#             except json.JSONDecodeError:
-#                 return None
-#     else:
-#         print('notfound')
-#         print("Users file not found, creating a new one.")
-#         with open(file_path, 'w') as f:
-#             json.dump([], f)  # Initialize with an empty list
-
-  
     
 
 def save_user(user_data):
-    file_path = get_users_json()
+    users = load_users()
+    found = False
 
-    if os.path.exists(file_path):
-        try:
-            with open(file_path, "r") as file:
-                users = json.load(file)
+    for user in users:
+        if user_data["user_email"]==user["user_email"]:
+            found = True
             
-        except json.JSONDecodeError:   
-            users = []
-
-        found = False
-
-        for user in users:
-            if user_data["user_email"]==user["user_email"]:
-                found = True
-            
-        if found:   
-            print("User already exists")
-        else:
-            users.append(user_data)
-            with open(file_path, 'w') as file:
-                json.dump(users, file, indent=4)
+    if found:   
+        print("User already exists")
+    else:
+        users.append(user_data)
+        save_user_when_signup(users)
           
-            print(f"successfully {user_data["role"]} account created!")
+        print(f"successfully {user_data["role"]} account created!")
            
 
 
