@@ -1,0 +1,32 @@
+{
+    "order_id": "401-2796-2018",
+    "date": "2024-11-05",
+    "time": "11:04",
+    "customer_details": {
+        "customer_id": "2e38fdfc",
+        "name": "suraj",
+        "email": "suraj@gmail.com",
+        "role": "customer"
+    },
+    "items": [
+        {
+            "item_id": "M003",
+            "name": "BBQ Chicken Pizza",
+            "quantity": 10,
+            "price_per_unit": 1100.99,
+            "total_price": 11009
+        },
+        {
+            "item_id": "M002",
+            "name": "Pepperoni Pizza",
+            "quantity": 2,
+            "price_per_unit": 1000.99,
+            "total_price": 2001
+        }
+    ],
+    "sub_total": 13010,
+    "gst_amount": 2341.7999999999997,
+    "grand_total": 15351.8,
+    "status": "Order Placed",
+    "payment_method": "Card"
+}

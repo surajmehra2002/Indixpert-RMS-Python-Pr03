@@ -19,6 +19,7 @@ class Customer:
                 print("3. View ongoing order")
                 print("4. Cancel order")
                 print("5. Payment history")
+                print("6. View reserved tables")
                 print("7. Profile Information")
                 print("0. Log out")
                 choice = input("Enter your choice: ")
@@ -27,8 +28,10 @@ class Customer:
                 elif choice == '2':
                     self.order.take_order()
                 elif choice == '3':
-                    # self.add_menu_item()
-                    pass
+                    self.order.view_ongoing_order()
+                elif choice == '4':
+                    self.order.cancel_order()
+                
                 elif choice == '7':
                     self.profile_info()
                 elif choice == '0':
