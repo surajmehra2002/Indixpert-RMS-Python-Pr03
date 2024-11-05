@@ -144,7 +144,7 @@ class Order:
 
     def view_ongoing_order(self):
         directory = 'src/data_base/customers/suraj_2e38fdfc/'  # Path to the directory where invoice files are stored
-        order_found = False  # Flag to check if the order is found
+        order_found = False 
         
         user_all_order_invoice_list = []
         for filename in os.listdir(directory):
@@ -153,14 +153,12 @@ class Order:
                     orders = json.load(file)
                     user_all_order_invoice_list.append(orders)
                     order_found = True
-        # print(user_all_order_invoice_list)
         print(f"{'Name':<35} {'Quantity':<10} {'Status':<20} {'Payment'}")
         print('-'*65)
         for invoice in user_all_order_invoice_list:
             for item in invoice['items']:
                 print(f"{item['name']:<35} {item['quantity']:<10} {invoice['status']:<20} {invoice['payment_method']}")
-            # print(invoice['items'])
-        # print(len(user_all_order_invoice_list))           
+            
 
 
         if not order_found:
