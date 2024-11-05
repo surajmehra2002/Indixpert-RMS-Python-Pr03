@@ -18,11 +18,12 @@ class Menu:
                 print("\n=============  MENU  ================")
 
                 for category in categories:
-                    print(f"\n{category}")
-                    print("-" * 35)
+                    print(f"\n***** {category} *****")
+                    print(f"{'Name':<25} {'Half':<15} {'Half':<25}")
+                    print("-" * 50)
                     for item in self.items:
                         if item['category'] == category:
-                            print(f"{item['name']:<25} ₹{item['price']:<25}")
+                            print(f"{item['name']:<25} ₹{item['half_price']:<15} ₹{item['price']:<25}")
 
 
             else:

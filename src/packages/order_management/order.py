@@ -138,3 +138,25 @@ class Order:
                 print("Order placed successfully!")
             else:
                 print("Order cancelled.")
+
+  
+
+
+    def view_ongoing_order(self):
+        directory = 'src/data_base/customers/suraj_2e38fdfc/'  # Path to the directory where invoice files are stored
+        order_found = False  # Flag to check if the order is found
+        
+        user_all_order_invoice_list = []
+        for filename in os.listdir(directory):
+            if filename.endswith(".json"):
+                with open(os.path.join(directory, filename)) as file:
+                    orders = json.load(file)
+                    user_all_order_invoice_list.append(orders)
+                    order_found = True
+        print(user_all_order_invoice_list)
+        # print(len(user_all_order_invoice_list))           
+
+
+        if not order_found:
+            print("Order not found or not in ongoing status.")
+

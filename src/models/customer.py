@@ -29,8 +29,10 @@ class Customer:
                     self.order.take_order()
                 elif choice == '3':
                     self.order.view_ongoing_order()
+                    pass
                 elif choice == '4':
-                    self.order.cancel_order()
+                    # self.order.cancel_order()
+                    pass
                 
                 elif choice == '7':
                     self.profile_info()

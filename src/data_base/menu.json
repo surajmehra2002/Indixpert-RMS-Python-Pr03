@@ -3,55 +3,63 @@
         "item_id": "M001",
         "name": "Margherita Pizza",
         "category": "Pizza",
-        "price": 800.99,
+        "half_price": 450.00,
+        "price": 800.00,
         "availability": true
       },
       {
         "item_id": "M002",
         "name": "Pepperoni Pizza",
         "category": "Pizza",
-        "price": 1000.99,
+        "half_price": 600.00,
+        "price": 1000.00,
         "availability": true
       },
       {
         "item_id": "M003",
         "name": "BBQ Chicken Pizza",
         "category": "Pizza",
-        "price": 1100.99,
+        "half_price": 700.00,
+        "price": 1100.00,
         "availability": true
       },
       {
         "item_id": "M004",
         "name": "Caesar Salad",
         "category": "Salad",
-        "price": 600.99,
+        "half_price": 300.00,
+        "price": 600.00,
         "availability": true
       },
       {
         "item_id": "M005",
         "name": "Greek Salad",
         "category": "Salad",
-        "price": 70.99,
+        "half_price": 40.00,
+        "price": 75.00,
         "availability": true
       },
       {
         "item_id": "M006",
         "name": "Grilled Chicken Sandwich",
         "category": "Sandwich",
-        "price": 90.49,
+        "half_price": 45.00,
+        "price": 85.00,
         "availability": true
       },
       {
         "item_id": "M007",
         "name": "BLT Sandwich",
         "category": "Sandwich",
-        "price": 80.49,
+        "half_price": 60.00,
+        "price": 139.00,
         "availability": true
       },
       {
         "item_id": "M008",
         "name": "Spaghetti Bolognese",
         "category": "Pasta",
+        "half_price": 80.00,
         "price": 120.99,
         "availability": true
       },
@@ -59,6 +67,7 @@
         "item_id": "M009",
         "name": "Chicken Alfredo",
         "category": "Pasta",
+        "half_price": 75.00,
         "price": 130.99,
         "availability": true
       },
@@ -66,6 +75,7 @@
         "item_id": "M010",
         "name": "Garlic Bread",
         "category": "Appetizer",
+        "half_price": 20.00,
         "price": 30.99,
         "availability": true
       },
@@ -73,6 +83,7 @@
         "item_id": "M011",
         "name": "French Fries",
         "category": "Appetizer",
+        "half_price": 25.00,
         "price": 40.49,
         "availability": true
       },
@@ -80,6 +91,7 @@
         "item_id": "M012",
         "name": "Buffalo Wings",
         "category": "Appetizer",
+        "half_price": 45.00,
         "price": 80.99,
         "availability": true
       },
@@ -87,6 +99,7 @@
         "item_id": "M013",
         "name": "Cheeseburger",
         "category": "Burger",
+        "half_price": 50.00,
         "price": 90.99,
         "availability": true
       },
@@ -94,6 +107,7 @@
         "item_id": "M014",
         "name": "Veggie Burger",
         "category": "Burger",
+        "half_price": 50.00,
         "price": 80.99,
         "availability": true
       },
@@ -101,34 +115,39 @@
         "item_id": "M015",
         "name": "Chocolate Cake",
         "category": "Dessert",
-        "price": 50.99,
+        "half_price": 100,
+        "price": 220.99,
         "availability": true
       },
       {
         "item_id": "M016",
         "name": "Apple Pie",
         "category": "Dessert",
-        "price": 40.99,
+        "half_price": 160,
+        "price": 350.99,
         "availability": true
       },
       {
         "item_id": "M017",
         "name": "Vanilla Ice Cream",
         "category": "Dessert",
-        "price": 30.99,
+        "half_price": 225.00,
+        "price": 400.99,
         "availability": true
       },
       {
         "item_id": "M018",
         "name": "Latte",
         "category": "Beverage",
-        "price": 30.99,
+        "half_price": 100.0,
+        "price": 220.99,
         "availability": true
       },
       {
         "item_id": "M019",
         "name": "Iced Coffee",
         "category": "Beverage",
+        "half_price": 100,
         "price": 30.49,
         "availability": true
       },
@@ -136,7 +155,8 @@
         "item_id": "M020",
         "name": "Lemonade",
         "category": "Beverage",
-        "price": 20.99,
+        "half_price": 90.00,
+        "price": 200.99,
         "availability": true
       }
 ]
