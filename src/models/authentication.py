@@ -1,24 +1,7 @@
 import os,json
 from src.models.json_files_path import load_users
+from src.models.json_files_path import save_user_when_signup
 
-# def load_users():
-#     """Load users from the JSON file or initialize if the file doesn't exist or is empty."""
-#     file_path = get_users_json()
-#     if os.path.exists(file_path):
-       
-#         with open(file_path, 'r') as f:
-#             try:
-#                 users = json.load(f)
-#                 return users
-#             except json.JSONDecodeError:
-#                 # print("Error decoding users.json. Please ensure it's a valid JSON file.")
-#                 users = []
-#                 return users
-#     else:       
-#         users = []
-#         with open(file_path, 'w') as f:
-#             json.dump(users, f)  # Initialize with an empty list
-#         return users
 def get_user_from_db(username):
     found = False
     users = load_users()
@@ -44,6 +27,23 @@ def authenticate_user(username, password):
                 return "customer"
         else:
             print("Invalid credentials")
+
+def sign_up_autentication(user_data):
+    users = load_users()
+    found = False
+
+    for user in users:
+        if user_data["user_email"]==user["user_email"]:
+            found = True
+            
+    if found:   
+        print("User already exists")
+    else:
+        users.append(user_data)
+        save_user_when_signup(users)
+          
+        print(f"successfully {user_data["role"]} account created!")
+
             
 
 

@@ -1,26 +1,12 @@
 [
     {
-        "id": "76ffc6d6",
+        "id": "2e38fdfc",
+        "name": "suraj",
         "username": "suraj",
         "user_email": "suraj@gmail.com",
-        "password": "Suraj123",
-        "mobile": 2222222222,
-        "role": "customer"
-    },
-    {
-        "id": "2e5bb775",
-        "username": "manoj",
-        "user_email": "maonj@gmail.com",
-        "password": "manoj",
-        "mobile": 3333333333,
-        "role": "customer"
-    },
-    {
-        "id": "194525c1",
-        "username": "kailash",
-        "user_email": "kailash@gmail.com",
-        "password": "kailash123",
-        "mobile": 9999999999,
-        "role": "admin"
+        "password": "surajsingh",
+        "mobile": 9634912165,
+        "role": "customer",
+        "joining_date": "05-11-2024"
     }
 ]

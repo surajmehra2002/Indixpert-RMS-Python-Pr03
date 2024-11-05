@@ -1,12 +1,11 @@
-import json
+import json,datetime
 import os
 import uuid
 
-# importing method
-from src.models.authentication import authenticate_user
-from src.models.authentication import get_user_from_db
-from src.models.json_files_path import load_users
-from src.models.json_files_path import save_user_when_signup
+import src.models.authentication as auth
+
+
+
 
 # importing class
 from src.models.customer import Customer
@@ -16,20 +15,8 @@ def generate_id():
     
 
 def save_user(user_data):
-    users = load_users()
-    found = False
-
-    for user in users:
-        if user_data["user_email"]==user["user_email"]:
-            found = True
-            
-    if found:   
-        print("User already exists")
-    else:
-        users.append(user_data)
-        save_user_when_signup(users)
-          
-        print(f"successfully {user_data["role"]} account created!")
+    auth.sign_up_autentication(user_data)
+   
            
 
 
@@ -58,7 +45,14 @@ def user_email():
     else:
         print("invalid email address")
         return user_email()
-    
+def user_first_name():    
+    while True:
+            first_name = input("Enter first name: ").strip()
+            if first_name != "":
+                break
+            else:
+                print("first name can't empty")
+    return first_name
 def user_name():
     while True:
             username = input("Enter your username: ").strip()
@@ -70,12 +64,19 @@ def user_name():
 
 def user_password():
     while True:
-            password = input("Enter your password: ").strip()
-            if password != "":
-                break
-            else:
-                print("password can't empty")
-    return password
+        password = input("Enter your password (min 6 characters): ").strip()
+        
+        if len(password) < 6:
+            print("Password must be at least 6 characters long.")
+            continue
+        
+        confirm_password = input("Confirm your password: ").strip()
+        
+        if confirm_password != password:
+            print("Passwords do not match. Please try again.")
+            continue
+        
+        return password
 
 def user_mobile_no():
     while True:
@@ -112,11 +113,13 @@ def create_customer_user():
 
     customer_user = {
         "id": generate_id(),
+        "name":user_first_name(),
         "username": user_name(),
         "user_email": user_email(),
         "password": user_password(),
         "mobile": user_mobile_no(),
-        "role": user_role()
+        "role": user_role(),
+        "joining_date": datetime.datetime.now().strftime("%d-%m-%Y")
     }
     
     save_user(customer_user)
@@ -150,11 +153,11 @@ def create_customer_user():
 def login_users():
     username = input("Enter your username: ")
     password = input("Enter your password: ")
-    role = authenticate_user(username, password)           
+    role = auth.authenticate_user(username, password)           
                        
     if role == 'customer':
                 print("Login Successfully!\n")
-                user = get_user_from_db(username)
+                user = auth.get_user_from_db(username)
                 customer = Customer(user)
                 customer.run_customer_panel()
     elif role == 'admin':
@@ -165,16 +168,16 @@ def main_menu():
     print("\n==============* Welcome to the Restaurant Management System *==================")
     while True:
         
-        print("1. Login")
-        print("2. Sign Up")
+        print("1. Sign Up")
+        print("2. Login")
         print("3. Exit")
         
         choice = input("Enter your choice: ")
         
         if choice == '1':
-            login_users()            
-        elif choice == '2':
             create_customer_user()
+        elif choice == '2':
+            login_users()            
         elif choice == '3':
             print("Exiting the system. Thank you!")
             break

@@ -1,0 +1,25 @@
+{
+    "order_id": "401-9601-3931",
+    "date": "2024-11-04",
+    "time": "21:06",
+    "customer_details": {
+        "customer_id": "2f3f2ee5",
+        "name": "lalit",
+        "email": "lalit@gmail.com",
+        "role": "customer"
+    },
+    "items": [
+        {
+            "item_id": "M001",
+            "name": "Margherita Pizza",
+            "quantity": 150,
+            "price_per_unit": 8.99,
+            "total_price": 1348
+        }
+    ],
+    "sub_total": 1348,
+    "gst_percentage": 18,
+    "gst_amount": 242.64,
+    "grand_total": 1590.6399999999999,
+    "status": "Ordered"
+}

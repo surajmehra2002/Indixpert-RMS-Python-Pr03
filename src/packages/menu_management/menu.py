@@ -3,6 +3,7 @@
 import json
 import os
 
+
 from src.models.json_files_path import load_menu
 
 class Menu:
@@ -11,15 +12,18 @@ class Menu:
 
 
     def display_menu(self):
+            categories = list({item['category'] for item in self.items})
 
             if len(self.items)>0:        
-                print("\n********Display all menu items.**********")
-                print(f"{'Item Id':<20} {'Name':<25} {'Category':<20} {'Price':<20} {'Description':<20} {'Availablity':<20} ")  # Header
-                print("-" * 125)  
-            
-                for item in self.items:
-                    print(f"{item['item_id']:<20} {item['name']:<25} {item['category']:<20} {item['price']:<20} {item['description']} {item['availability']}")
+                print("\n=============  MENU  ================")
+
+                for category in categories:
+                    print(f"\n{category}")
+                    print("-" * 35)
+                    for item in self.items:
+                        if item['category'] == category:
+                            print(f"{item['name']:<25} ₹{item['price']:<25}")
+
+
             else:
                 print("menu item not available")
-
-   
