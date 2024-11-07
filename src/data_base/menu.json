@@ -35,7 +35,6 @@
         "item_id": "M005",
         "name": "Greek Salad",
         "category": "Salad",
-        "half_price": 40.00,
         "price": 75.00,
         "availability": true
       },

@@ -1,0 +1,34 @@
+{
+    "order_id": "401-5260-4837",
+    "date": "2024-11-07",
+    "time": "16:35",
+    "customer_details": {
+        "customer_id": "2e38fdfc",
+        "name": "suraj",
+        "email": "suraj@gmail.com",
+        "role": "customer"
+    },
+    "items": [
+        {
+            "item_id": "M001",
+            "name": "Margherita Pizza",
+            "quantity": 20,
+            "type": "half",
+            "price_per_unit": 450.0,
+            "total_price": 9000
+        },
+        {
+            "item_id": "M016",
+            "name": "Apple Pie",
+            "quantity": 10,
+            "type": "full",
+            "price_per_unit": 350.99,
+            "total_price": 3509
+        }
+    ],
+    "sub_total": 12509,
+    "gst_amount": 2251.62,
+    "grand_total": 14760.619999999999,
+    "status": "Order Placed",
+    "payment_method": "Card"
+}

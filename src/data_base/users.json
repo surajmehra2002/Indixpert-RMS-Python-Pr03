@@ -8,5 +8,15 @@
         "mobile": 9634912165,
         "role": "customer",
         "joining_date": "05-11-2024"
+    },
+    {
+        "id": "83437730",
+        "name": "manoj",
+        "username": "manoj",
+        "user_email": "manoj@gmail.com",
+        "password": "manojsingh",
+        "mobile": 9634377090,
+        "role": "customer",
+        "joining_date": "07-11-2024"
     }
 ]

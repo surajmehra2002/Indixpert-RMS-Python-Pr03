@@ -161,11 +161,14 @@ lise1 = [
       }
 ]
   
+# print(lise1)
 
-search = [item for item in lise1 if item['name']== "Lemonade"]
-print (type(search))
-print(search)
-if not search:
-    print("empty")
-else:
-    print("an")
+for index, item in enumerate(lise1):
+    print(index, item)
+# search = [item for item in lise1 if item['name']== "Lemonade"]
+# print (type(search))
+# print(search)
+# if not search:
+#     print("empty")
+# else:
+#     print("an")

@@ -15,10 +15,11 @@ class Menu:
             categories = list({item['category'] for item in self.items})
 
             if len(self.items)>0:        
-                print("\n=============  MENU  ================")
+                print("\n===================  MENU  ====================")
 
                 for category in categories:
-                    print(f"\n***** {category} *****")
+                    print(f"\n\nCategory: {category}")
+                    print("-" * 50)
                     print(f"{'Name':<25} {'Half':<15} {'Full':<25}")
                     print("-" * 50)
 
@@ -26,7 +27,8 @@ class Menu:
                     
                     for item in self.items:
                         if item['category'] == category:
-                            print(f"{item['name']:<25} ₹{item['half_price']:<15} ₹{item['price']:<25}")
+                            half_price = f"₹{item['half_price']}" if 'half_price' in item else ''
+                            print(f"{item['name']:<25} {half_price:<10} ₹{item['price']:<25}")
 
 
             else:

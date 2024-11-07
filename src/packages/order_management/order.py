@@ -53,18 +53,19 @@ class Order:
             print("Searching...", end="")
             loading()
             print("\n\nAvailable items: ")
-            print('-' * 40)
-            print(f"{'Index':<10} {'Name':<20} {'Price':<20}")
-            print('-' * 40)
+            print('-' * 65)
+            print(f"{'Index':<10} {'Name':<35} {'Half':<10}  {'Full'}")
+            print('-' * 65)
 
             for index, item in enumerate(ordered_items, start=1):
-                print(f"{index:<10} {item['name']:<20} ₹{item['price']:<20}")
+                half_price = f"₹{item['half_price']}" if 'half_price' in item else ''
+                print(f"{index:<10} {item['name']:<35} {half_price:<10} ₹{item['price']}")
 
             if len(ordered_items) > 1:
                 try:
                     chosen_index = int(input("\nMultiple items found. Enter the index number of the item you want: ")) - 1
                     if chosen_index < 0 or chosen_index >= len(ordered_items):
-                        print("Invalid index. Please try again.")
+                        print("Invalid index. Please try again.") 
                         continue
                     selected_item = ordered_items[chosen_index]
                 except ValueError:
@@ -80,16 +81,37 @@ class Order:
             confirm = input(f"Is this the item '{selected_item['name']}' you'd like to order? (y/n): ").strip().lower()
             if confirm != 'y':
                 continue
+            def order_type():
+                while True:
+                    
+                    order_type_choice = input("\n1: half \n2: full \nEnter order type: ")
 
+                    if order_type_choice == "1":
+                        order_type = "half"
+                        break
+                    elif order_type_choice == "2":
+                        order_type = "full"
+                        break
+                    else:
+                        print("Invalid choice. Order canceled.")
+                        
+                return order_type
+           
+            order_size = order_type()
             quantity = int(input("Enter quantity: "))
-            base_price = selected_item['price']
-            total_price = base_price * quantity
+            def base_price():
+                if order_size == 'half':
+                    return selected_item['half_price']
+                else:
+                    return selected_item['price']
+            total_price = base_price() * quantity
 
             items.append({
                 "item_id": selected_item["item_id"],
                 "name": selected_item['name'],
                 "quantity": quantity,
-                "price_per_unit": base_price,
+                "type": order_size,
+                "price_per_unit": base_price(),
                 "total_price": int(total_price)
             })
 
@@ -143,24 +165,27 @@ class Order:
 
 
     def view_ongoing_order(self):
-        directory = 'src/data_base/customers/suraj_2e38fdfc/'  # Path to the directory where invoice files are stored
-        order_found = False 
+        user_directory = f"{self.user['username']}_{self.user['id']}"
+        directory = f'src/data_base/customers/{user_directory}/'  # Path to the directory where invoice files are stored
+        # order_found = False 
         
         user_all_order_invoice_list = []
-        for filename in os.listdir(directory):
-            if filename.endswith(".json"):
-                with open(os.path.join(directory, filename)) as file:
-                    orders = json.load(file)
-                    user_all_order_invoice_list.append(orders)
-                    order_found = True
-        print(f"{'Name':<35} {'Quantity':<10} {'Status':<20} {'Payment'}")
-        print('-'*65)
-        for invoice in user_all_order_invoice_list:
-            for item in invoice['items']:
-                print(f"{item['name']:<35} {item['quantity']:<10} {invoice['status']:<20} {invoice['payment_method']}")
-            
+        try:
+            for filename in os.listdir(directory):
+                if filename.endswith(".json"):
+                    with open(os.path.join(directory, filename)) as file:
+                        orders = json.load(file)
+                        user_all_order_invoice_list.append(orders)
+                        # order_found = True
+            print(f"{'Name':<35} {'Quantity':<10} {'Type':<20} {'Status':<20} {'Payment'}")
+            print('-'*65)
+            for invoice in user_all_order_invoice_list:
+                for item in invoice['items']:
+                    print(f"{item['name']:<35} {item['quantity']:<10} {item['type']:<20} {invoice['status']:<20} {invoice['payment_method']}")
+                
+        except FileNotFoundError:
+            print("No order placed yet!")
 
-
-        if not order_found:
-            print("Order not found or not in ongoing status.")
+        # if not order_found:
+        #     print("Order not found or not in ongoing status.")
 

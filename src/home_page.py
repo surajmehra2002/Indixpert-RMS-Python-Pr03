@@ -94,16 +94,17 @@ def user_mobile_no():
 
 def user_role():
     
-    while True:
-            conform = input("Are you admin (y/n)").strip().upper()
-            if conform == "Y":
-                role = "admin"
-                break
-            elif conform == "N":
-                role = "customer"
-                break
-            else:
-                print("Please enter valid input")  
+    # while True:
+    #         conform = input("Are you admin (y/n)").strip().upper()
+    #         if conform == "Y":
+    #             role = "admin"
+    #             break
+    #         elif conform == "N":
+    #             role = "customer"
+    #             break
+    #         else:
+    #             print("Please enter valid input")  
+    role = 'customer'
     return role
             
 
