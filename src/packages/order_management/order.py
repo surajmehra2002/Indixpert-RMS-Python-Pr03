@@ -5,6 +5,10 @@ from datetime import datetime
 
 from src.models.json_files_path import load_menu
 from src.models.animation import loading
+from src.models.json_files_path import load_all_invoices_of_an_user
+
+
+
 
 class Order:
     def __init__(self, user):
@@ -167,25 +171,76 @@ class Order:
     def view_ongoing_order(self):
         user_directory = f"{self.user['username']}_{self.user['id']}"
         directory = f'src/data_base/customers/{user_directory}/'  # Path to the directory where invoice files are stored
-        # order_found = False 
+        invoices_list = load_all_invoices_of_an_user(directory)
         
-        user_all_order_invoice_list = []
-        try:
-            for filename in os.listdir(directory):
-                if filename.endswith(".json"):
-                    with open(os.path.join(directory, filename)) as file:
-                        orders = json.load(file)
-                        user_all_order_invoice_list.append(orders)
-                        # order_found = True
+        if len(invoices_list)!=0:
             print(f"{'Name':<35} {'Quantity':<10} {'Type':<20} {'Status':<20} {'Payment'}")
-            print('-'*65)
-            for invoice in user_all_order_invoice_list:
+            print('-'*95)
+            for invoice in invoices_list:
                 for item in invoice['items']:
                     print(f"{item['name']:<35} {item['quantity']:<10} {item['type']:<20} {invoice['status']:<20} {invoice['payment_method']}")
-                
-        except FileNotFoundError:
+
+        else:
             print("No order placed yet!")
 
-        # if not order_found:
-        #     print("Order not found or not in ongoing status.")
+    def cancel_order(self):
+        user_directory = f"{self.user['username']}_{self.user['id']}"
+        directory = f'src/data_base/customers/{user_directory}/'  # Path to the directory where invoice files are stored
+        invoices_list = load_all_invoices_of_an_user(directory)
+        
+        order_id = input("Enter the order ID you want to cancel: ").strip()
+        order_found = False
 
+        for invoice in invoices_list:
+            if invoice['order_id'] == order_id:
+                order_found = True
+                print("Why do you want to cancel this order?")
+                print("1. Ordered by mistake")
+                print("2. Found a better deal elsewhere")
+                print("3. Long delivery time")
+                print("4. Other")
+                
+                reason_choice = input("Enter the number corresponding to your reason: ")
+                reasons = {
+                    "1": "Ordered by mistake",
+                    "2": "Found a better deal elsewhere",
+                    "3": "Long delivery time",
+                    "4": "Other"
+                }
+                
+                cancellation_reason = reasons.get(reason_choice, "Other")
+                
+                # Update the status to "Canceled" and add the reason
+                invoice['status'] = 'Canceled'
+                invoice['cancellation_reason'] = cancellation_reason
+                
+                # Write the updated invoice back to the file
+                with open(os.path.join(directory, f"invoice_{order_id}.json"), 'w') as file:
+                    json.dump(invoice, file, indent=4)
+                
+                print(f"Order {order_id} has been canceled for the following reason: {cancellation_reason}")
+                break
+        
+        if not order_found:
+            print("Order ID not found.")
+
+    def payment_history(self):
+        user_directory = f"{self.user['username']}_{self.user['id']}"
+        directory = f'src/data_base/customers/{user_directory}/'  # Path to the directory where invoice files are stored
+        invoices_list = load_all_invoices_of_an_user(directory)
+        
+        if len(invoices_list)!=0:
+            print(f"{"Payment Mode":<20} {"Order ID":<40} {"Date & Time":<25} {"Totle Payment"}")
+            print("-"*110)
+            for invoice in invoices_list:
+                print(f"{invoice['payment_method']:<20} {invoice['order_id']:<40} {invoice['date']}, {invoice['time']:<25} {invoice['grand_total']}")
+        else:
+            print("No payment yet!")  
+
+
+    def generate_invoice(self):
+        user_directory = f"{self.user['username']}_{self.user['id']}"
+        directory = f'src/data_base/customers/{user_directory}/'  # Path to the directory where invoice files are stored
+        invoices_list = load_all_invoices_of_an_user(directory)
+        for invoice in invoices_list:
+            print(invoice)

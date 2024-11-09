@@ -19,8 +19,9 @@ class Customer:
                 print("3. View ongoing order")
                 print("4. Cancel order")
                 print("5. Payment history")
-                print("6. View reserved tables")
-                print("7. Profile Information")
+                print("6. View invoice")
+                print("7. View reserved tables")
+                print("8. Profile Information")
                 print("0. Log out")
                 choice = input("Enter your choice: ")
                 if choice == '1':
@@ -31,10 +32,15 @@ class Customer:
                     self.order.view_ongoing_order()
                     pass
                 elif choice == '4':
-                    # self.order.cancel_order()
-                    pass
+                    self.order.cancel_order()
+                    
+                elif choice == '5':
+                    self.order.payment_history()
+                elif choice == '6':
+                    self.order.generate_invoice()
+                    
                 
-                elif choice == '7':
+                elif choice == '8':
                     self.profile_info()
                 elif choice == '0':
                     print("Log out Successfully!\n")

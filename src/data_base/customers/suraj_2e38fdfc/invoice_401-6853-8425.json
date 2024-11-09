@@ -1,0 +1,26 @@
+{
+    "order_id": "401-6853-8425",
+    "date": "2024-11-08",
+    "time": "16:12",
+    "customer_details": {
+        "customer_id": "2e38fdfc",
+        "name": "suraj",
+        "email": "suraj@gmail.com",
+        "role": "customer"
+    },
+    "items": [
+        {
+            "item_id": "M003",
+            "name": "BBQ Chicken Pizza",
+            "quantity": 5,
+            "type": "half",
+            "price_per_unit": 700.0,
+            "total_price": 3500
+        }
+    ],
+    "sub_total": 3500,
+    "gst_amount": 630.0,
+    "grand_total": 4130.0,
+    "status": "Order Placed",
+    "payment_method": "Net Banking"
+}

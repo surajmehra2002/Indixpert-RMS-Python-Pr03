@@ -31,3 +31,18 @@ def load_menu():
     else:
         menu_data = []
     return menu_data
+
+def load_all_invoices_of_an_user(directory):
+    invoices_list = []
+    try:
+        for filename in os.listdir(directory):
+            if filename.endswith(".json"):
+                with open(os.path.join(directory, filename) ) as file:
+                    invoice = json.load(file)
+                    invoices_list.append(invoice)
+            
+    except FileNotFoundError:
+        pass
+    return invoices_list
+
+

@@ -21,6 +21,7 @@
     "sub_total": 1200,
     "gst_amount": 216.0,
     "grand_total": 1416.0,
-    "status": "Order Placed",
-    "payment_method": "UPI"
+    "status": "Canceled",
+    "payment_method": "UPI",
+    "cancellation_reason": "Found a better deal elsewhere"
 }
