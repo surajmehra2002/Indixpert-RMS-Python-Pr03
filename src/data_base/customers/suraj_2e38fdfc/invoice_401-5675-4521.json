@@ -1,0 +1,24 @@
+{
+    "order_id": "401-5675-4521",
+    "date": "2024-11-12",
+    "time": "03:12",
+    "customer_details": {
+        "customer_id": "2e38fdfc",
+        "name": "suraj",
+        "email": "suraj@gmail.com",
+        "role": "customer"
+    },
+    "items": [
+        {
+            "name": "water",
+            "quantity": 10,
+            "price_per_unit": 20.0,
+            "total_price": 200
+        }
+    ],
+    "sub_total": 200,
+    "gst_amount": 36.0,
+    "grand_total": 236,
+    "status": "Order Placed",
+    "payment_method": "Cash"
+}

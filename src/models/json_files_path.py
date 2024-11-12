@@ -3,6 +3,10 @@ menu_file_path = 'src/data_base/menu.json'
 order_file_path = 'src/data_base/customer'
 
 import os, json
+def menu_update(menu):
+    with open (menu_file_path, 'w') as file:
+        json.dump(menu, file, indent=4)
+    
 
 def load_users():
     if os.path.exists(users_file_path):

@@ -9,6 +9,7 @@ import src.models.authentication as auth
 
 # importing class
 from src.models.customer import Customer
+from src.models.admin import Admin
 
 def generate_id():
     return str(uuid.uuid4())[0:8]
@@ -127,42 +128,29 @@ def create_customer_user():
     
     return customer_user
 
-# def admin_menu(users_data):
-#     while True:
-#         print("\nadmin Menu:")
-#         print("1. Login")
-#         print("2. Sign Up")
-#         print("3. Back")
-        
-#         choice = input("Enter your choice: ")
-        
-#         if choice == '1':
-#             username = input("Enter your username: ")
-#             password = input("Enter your password: ")
-#             role = authenticate_user(username, password)
-#             if role == 'admin':
-#                 admin = admin(users_data)
-#                 admin.run_admin_panel()
-#         elif choice == '2':
-#             create_admin_user()
-#         elif choice == '3':
-#             break
-#         else:
-#             print("Invalid choice. Please try again.")
-
 
 def login_users():
     username = input("Enter your username: ")
     password = input("Enter your password: ")
     role = auth.authenticate_user(username, password)           
-                       
+    
+    
+                
     if role == 'customer':
-                print("Login Successfully!\n")
+                has_user_block = auth.user_block(username)
                 user = auth.get_user_from_db(username)
+                if has_user_block:
+                    print(f"You are block by our system with '{user['blocked']}' reason ")
+                    return
+                
+                print("Login Successfully!\n")
                 customer = Customer(user)
                 customer.run_customer_panel()
-    elif role == 'admin':
-                print("You are admin ")
+    if role == 'admin':
+                print("Login Successfully!\n")
+                user = auth.get_user_from_db(username)
+                admin = Admin(user)
+                admin.run_admin_panel()
 
 def main_menu():
     """Main menu to choose between admin, customer, or Exit."""

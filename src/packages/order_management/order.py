@@ -2,6 +2,7 @@ import json
 import os
 import random
 from datetime import datetime
+from tabulate import tabulate
 
 from src.models.json_files_path import load_menu
 from src.models.animation import loading
@@ -24,7 +25,7 @@ class Order:
         return "401-" + str(random.randint(1000, 9999)) + "-" + str(random.randint(1000, 9999))
 
     def payment_method(self):
-        methods = ['Card', 'Net Banking', 'UPI']
+        methods = ['Card', 'Net Banking', 'UPI', 'Cash']
         print("Choose your payment method:")
         for index, method in enumerate(methods, start=1):
             print(f"{index}. {method}")
@@ -37,12 +38,11 @@ class Order:
                 print("Invalid choice. Please select a valid payment method.")
 
     def take_order(self):
-        current_hour = datetime.now().hour
+        # current_hour = datetime.now().hour
 
-        if current_hour < 8 or current_hour >= 18:
-            print("Closed: Orders can only be placed between 8 AM and 6 PM.")
-            return
-
+        # if current_hour < 8 or current_hour >= 18:
+        #     print("Closed: Orders can only be placed between 8 AM and 6 PM.")
+        #     return
         items = []
         add_more = 'y'
 
@@ -69,7 +69,7 @@ class Order:
                 try:
                     chosen_index = int(input("\nMultiple items found. Enter the index number of the item you want: ")) - 1
                     if chosen_index < 0 or chosen_index >= len(ordered_items):
-                        print("Invalid index. Please try again.") 
+                        print("Invalid index. Please try again.")
                         continue
                     selected_item = ordered_items[chosen_index]
                 except ValueError:
@@ -81,50 +81,55 @@ class Order:
             if not selected_item['availability']:
                 print("Sorry, this item is currently unavailable.")
                 continue
-            
+
             confirm = input(f"Is this the item '{selected_item['name']}' you'd like to order? (y/n): ").strip().lower()
             if confirm != 'y':
                 continue
-            def order_type():
-                while True:
-                    
-                    order_type_choice = input("\n1: half \n2: full \nEnter order type: ")
 
-                    if order_type_choice == "1":
-                        order_type = "half"
-                        break
-                    elif order_type_choice == "2":
-                        order_type = "full"
-                        break
-                    else:
-                        print("Invalid choice. Order canceled.")
-                        
-                return order_type
-           
-            order_size = order_type()
+            # Check if the item has a half price; if not, skip order type selection
+            if 'half_price' in selected_item:
+                def order_type():
+                    while True:
+                        order_type_choice = input("\n1: half \n2: full \nEnter order type: ")
+                        if order_type_choice == "1":
+                            return "half"
+                        elif order_type_choice == "2":
+                            return "full"
+                        else:
+                            print("Invalid choice. Order canceled.")
+                order_size = order_type()
+            else:
+                order_size = "full"
+
             quantity = int(input("Enter quantity: "))
+
+            # Determine the base price based on order type
             def base_price():
-                if order_size == 'half':
+                if order_size == 'half' and 'half_price' in selected_item:
                     return selected_item['half_price']
                 else:
                     return selected_item['price']
+            
             total_price = base_price() * quantity
 
-            items.append({
-                "item_id": selected_item["item_id"],
+            item_entry = {
+                
                 "name": selected_item['name'],
                 "quantity": quantity,
-                "type": order_size,
                 "price_per_unit": base_price(),
                 "total_price": int(total_price)
-            })
+            }
+            if 'half_price' in selected_item and order_size == 'half':
+                item_entry["type"] = "half"
+
+            items.append(item_entry)
 
             add_more = input("Would you like to order another item? (y/n): ").strip().lower()
 
         if items:  # Ensure there are items to process
             sub_total = sum(item['total_price'] for item in items)
             gst_amount = (sub_total * self.gst_rate)
-            grand_total = sub_total + gst_amount
+            grand_total = sub_total + int(gst_amount)
 
             print(f"The total price including GST is: ₹{grand_total:.2f}")
             confirmation = input("Are you sure you want to place the order? (Y/N): ")
@@ -150,7 +155,7 @@ class Order:
                     "gst_amount": gst_amount,
                     "grand_total": grand_total,
                     "status": "Order Placed",
-                    "payment_method": self.payment_method() 
+                    "payment_method": self.payment_method()
                 }
 
                 folder_name = f"{self.user['username']}_{self.user['id']}"
@@ -165,6 +170,7 @@ class Order:
             else:
                 print("Order cancelled.")
 
+
   
 
 
@@ -174,55 +180,80 @@ class Order:
         invoices_list = load_all_invoices_of_an_user(directory)
         
         if len(invoices_list)!=0:
-            print(f"{'Name':<35} {'Quantity':<10} {'Type':<20} {'Status':<20} {'Payment'}")
-            print('-'*95)
+            print(f"{'Order ID':<40}{'Name':<35} {'Quantity':<10} {'Type':<20} {'Status':<20} {'Payment'}")
+            print('-'*135)
             for invoice in invoices_list:
                 for item in invoice['items']:
-                    print(f"{item['name']:<35} {item['quantity']:<10} {item['type']:<20} {invoice['status']:<20} {invoice['payment_method']}")
+                    item_type = item.get('type', '-')
+                    print(f"{invoice['order_id']:<40} {item['name']:<35} {item['quantity']:<10} {item_type:<20} {invoice['status']:<20} {invoice['payment_method']}")
 
         else:
             print("No order placed yet!")
+    def take_order_id(self,invoices_list):
+        while True:
+            order_id = input("Enter the order ID you want to cancel (quit for 0): ").strip()
+            order_id_list = [invoice['order_id'] for invoice in invoices_list]
+            if order_id == '0' or order_id in order_id_list:
+                break
+        return order_id
 
     def cancel_order(self):
         user_directory = f"{self.user['username']}_{self.user['id']}"
         directory = f'src/data_base/customers/{user_directory}/'  # Path to the directory where invoice files are stored
         invoices_list = load_all_invoices_of_an_user(directory)
         
-        order_id = input("Enter the order ID you want to cancel: ").strip()
-        order_found = False
+        # while True
+        order_id = self.take_order_id(invoices_list)
+        if order_id != '0':
+            order_found = False
+            
+            for invoice in invoices_list:
+                if invoice['order_id'] == order_id:
+                    order_found = True
+                    if invoice['status']!='Canceled':
+                        while True:
+                            print("Why do you want to cancel this order?")
+                            print("0. Go back to main menu")
+                            print("1. Ordered by mistake")
+                            print("2. Found a better deal elsewhere")
+                            print("3. Long delivery time")
+                            print("4. Other")
+                            
+                            reason_choice = input("Enter the number corresponding to your reason: ").strip()
+                            
+                            if reason_choice == "0":
+                                print("Returning to main menu without canceling the order.",end='')
+                                loading()
+                                print('\n')
+                                return  # Exit the function without canceling
+                            
+                            reasons = {
+                                "1": "Ordered by mistake",
+                                "2": "Found a better deal elsewhere",
+                                "3": "Long delivery time",
+                                "4": "Other"
+                            }
+                            
+                            cancellation_reason = reasons.get(reason_choice)
+                            
+                            if cancellation_reason:
+                                # Update the status to "Canceled" and add the reason
+                                invoice['status'] = 'Canceled'
+                                invoice['cancellation_reason'] = cancellation_reason
+                                
+                                # Write the updated invoice back to the file
+                                with open(os.path.join(directory, f"invoice_{order_id}.json"), 'w') as file:
+                                    json.dump(invoice, file, indent=4)
+                                
+                                print(f"Order {order_id} has been canceled for the following reason: {cancellation_reason}")
+                                break
+                            else:
+                                print("Invalid input. Please enter a valid option.")
+                    else:
+                        print("This order already canceled")    
 
-        for invoice in invoices_list:
-            if invoice['order_id'] == order_id:
-                order_found = True
-                print("Why do you want to cancel this order?")
-                print("1. Ordered by mistake")
-                print("2. Found a better deal elsewhere")
-                print("3. Long delivery time")
-                print("4. Other")
-                
-                reason_choice = input("Enter the number corresponding to your reason: ")
-                reasons = {
-                    "1": "Ordered by mistake",
-                    "2": "Found a better deal elsewhere",
-                    "3": "Long delivery time",
-                    "4": "Other"
-                }
-                
-                cancellation_reason = reasons.get(reason_choice, "Other")
-                
-                # Update the status to "Canceled" and add the reason
-                invoice['status'] = 'Canceled'
-                invoice['cancellation_reason'] = cancellation_reason
-                
-                # Write the updated invoice back to the file
-                with open(os.path.join(directory, f"invoice_{order_id}.json"), 'w') as file:
-                    json.dump(invoice, file, indent=4)
-                
-                print(f"Order {order_id} has been canceled for the following reason: {cancellation_reason}")
-                break
-        
-        if not order_found:
-            print("Order ID not found.")
+            if not order_found:
+                print("Order ID not found.")
 
     def payment_history(self):
         user_directory = f"{self.user['username']}_{self.user['id']}"
@@ -238,9 +269,65 @@ class Order:
             print("No payment yet!")  
 
 
-    def generate_invoice(self):
+    def generate_invoice(self,order_data):
+        # Extracting customer and order details
+        order_id = order_data.get("order_id")
+        date = order_data.get("date")
+        time = order_data.get("time")
+        customer_name = order_data["customer_details"].get("name")
+        customer_email = order_data["customer_details"].get("email")
+        payment_method = order_data.get("payment_method")
+        status = order_data.get("status")
+        
+        # Extracting items details
+        items = order_data.get("items", [])
+        
+        # Creating item table
+        item_table = []
+        for item in items:
+            item_name = item.get("name")
+            quantity = item.get("quantity")
+            price_per_unit = item.get("price_per_unit")
+            total_price = item.get("total_price")
+            item_table.append([item_name, quantity, f"₹{price_per_unit:.2f}", f"₹{total_price:.2f}"])
+
+        sub_total = order_data.get("sub_total")
+        gst_amount = order_data.get("gst_amount")
+        grand_total = order_data.get("grand_total")
+
+        print("\n" + "="*50)
+        print(f"{'INVOICE':^50}")
+        print("="*50)
+        print(f"Order ID: {order_id}")
+        print(f"Date: {date} | Time: {time}")
+        print(f"Customer: {customer_name} ({customer_email})")
+        print(f"Payment Method: {payment_method}")
+        print(f"Status: {status}")
+        print("="*50)
+        
+        print(tabulate(item_table, headers=["Item Name", "Quantity", "Price per Unit", "Total Price"], tablefmt="fancy_grid"))
+        
+        print("="*50)
+        print(f"{'Subtotal:':<30} ₹{sub_total:.2f}")
+        print(f"{'GST (18%):':<30} ₹{gst_amount:.2f}")
+        print(f"{'Grand Total:':<30} ₹{grand_total:.2f}")
+        print("="*50)
+
+    
+
+
+
+    def find_invoice(self):
         user_directory = f"{self.user['username']}_{self.user['id']}"
         directory = f'src/data_base/customers/{user_directory}/'  # Path to the directory where invoice files are stored
         invoices_list = load_all_invoices_of_an_user(directory)
+        order_ID = input("enter order id for want view invoice: ")
+        order_found = False
         for invoice in invoices_list:
-            print(invoice)
+            if invoice['order_id']==order_ID:
+                order_found = True
+                self.generate_invoice(invoice)
+        if not order_found:
+            print("ERROR: Invalid order id! ")
+                
+

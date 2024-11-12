@@ -1,52 +1,48 @@
 # users/admin.py
 import json
 
+from src.packages.menu_management.menu import Menu
+from src.admin_models.user_managment import Users
+
+
 class Admin:
-    def __init__(self, users_data):
-        self.users_data = users_data
+    def __init__(self, user):
+        self.user = user
+        self.menu = Menu()
+        self.users = Users()
 
     def run_admin_panel(self):
-        print("Admin Panel")
+        print("Admin dashboard")
+        print("-"*40)
         while True:
-            print("\n1. Create new client")
-            print("2. View users")
-            print("3. Exit")
+            
+            print("1. View menu")
+            print("2. Add menu item")
+            print("3. Update menu item")
+            print("4. View all customer")
+            print("5. Customer information")
+            print("6. Remove user")
+            print("7. Order status")
+            print("8. Payment history")
+            print("9. Refund request")
+            print("0. log out")
             choice = input("Enter your choice: ")
-
             if choice == '1':
-                self.create_client_user()
+                self.menu.display_menu()
+                input("Press 'Enter' to show the Dashboard")
             elif choice == '2':
-                self.view_users()
+                self.menu.add_menu_item()
+                input("Press 'Enter' to show the Dashboard")
             elif choice == '3':
+                self.menu.update_menu_item()
+                input("Press 'Enter' to show the Dashboard")
+            elif choice == '6':
+                self.users.block_user()
+                input("Press 'Enter' to show the Dashboard")
+
+                pass
+            elif choice == '0':
+                print("Log out successfully \n ")
                 break
             else:
                 print("Invalid choice. Please try again.")
-
-    def create_client_user(self):
-        """Create a new client user and save to users.json."""
-        username = input("Enter client username: ")
-        password = input("Enter client password: ")
-
-        new_client = {
-            "username": username,
-            "password": password,
-            "role": "client"
-        }
-
-        self.save_user(new_client)
-        print(f"Client {username} created successfully!")
-
-    def save_user(self, user_data):
-        """Save the new user to users.json."""
-        file_path = 'data/users.json'
-        with open(file_path, 'r+') as f:
-            users = json.load(f)
-            users.append(user_data)
-            f.seek(0)
-            json.dump(users, f, indent=4)
-
-    def view_users(self):
-        """Display all users in the system."""
-        print("Users in the system:")
-        for user in self.users_data:
-            print(f"Username: {user['username']}, Role: {user['role']}")

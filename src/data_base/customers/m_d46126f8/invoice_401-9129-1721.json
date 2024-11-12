@@ -1,0 +1,30 @@
+{
+    "order_id": "401-9129-1721",
+    "date": "2024-11-12",
+    "time": "03:20",
+    "customer_details": {
+        "customer_id": "d46126f8",
+        "name": "m",
+        "email": "mohit@gmail.com",
+        "role": "customer"
+    },
+    "items": [
+        {
+            "name": "Pepperoni Pizza",
+            "quantity": 2,
+            "price_per_unit": 1000.0,
+            "total_price": 2000
+        },
+        {
+            "name": "water",
+            "quantity": 2,
+            "price_per_unit": 20.0,
+            "total_price": 40
+        }
+    ],
+    "sub_total": 2040,
+    "gst_amount": 367.2,
+    "grand_total": 2407,
+    "status": "Order Placed",
+    "payment_method": "UPI"
+}

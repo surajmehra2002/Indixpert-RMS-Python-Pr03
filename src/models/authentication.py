@@ -28,6 +28,16 @@ def authenticate_user(username, password):
         else:
             print("Invalid credentials")
 
+def user_block(username):
+    user = get_user_from_db(username)
+    if user is None:
+        return
+    elif "blocked" in user:
+        return True 
+    else:
+        return False
+
+
 def sign_up_autentication(user_data):
     users = load_users()
     found = False
