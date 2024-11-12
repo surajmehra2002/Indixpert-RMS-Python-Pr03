@@ -15,8 +15,14 @@ class Menu:
 
     def update_menu_item(self):
         item_found = False
-
-        item_name = input("Enter the item name which you want update: ").strip()
+        while True:
+            found = False
+            item_name = input("Enter the item name which you want update: ").strip()
+            for item in self.items:
+                if item['name'].lower() == item_name.lower():
+                    found = True
+            if found:
+                break
         
         for item in self.items:
             # Find the item by name (case-insensitive)

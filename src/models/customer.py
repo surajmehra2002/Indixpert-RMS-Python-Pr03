@@ -58,43 +58,4 @@ class Customer:
         print(f"{'Role:':<10} {self.user['role']}")
         print(f"{'Joining_date:':<10} {self.user['joining_date']}")
     
-    def place_order(self):
-        """Place an order from available menu items using the Order class."""
-        if not self.menu.items:
-            print("No items available to order.")
-            return
-
-        print("Place an order:")
-        self.menu.display_menu()  # Show the menu to the customer
-        item_name = input("Enter the name of the item you'd like to order: ")
-
-        # Check if the item exists in the menu
-        item_exists = any(item['name'] == item_name for item in self.menu.items)
-        if not item_exists:
-            print("Item not found in the menu.")
-            return
-
-        quantity = int(input("Enter the quantity: "))
-        self.order.add_order(item_name, quantity)  # Call the add_order method to place the order
-        print(f"Order placed for {quantity} x {item_name}.")
-
-    # def add_menu_item(self):
-    #     """Method to add a new item to the menu."""
-    #     print("Add a new menu item:")
-    #     item_name = input("Enter the name of the item: ")
-    #     item_description = input("Enter the description of the item: ")
-    #     item_price = float(input("Enter the price of the item: "))
-    #     item_id = len(self.menu.items) + 1  # Generate a new ID based on the current number of items
-    #     item_available = True  # Default availability
-
-    #     new_item = {
-    #         "id": item_id,
-    #         "name": item_name,
-    #         "description": item_description,
-    #         "price": item_price,
-    #         "available": item_available
-    #     }
-
-    #     self.menu.add_item(new_item)  # Call the add_item method to add the new item
-# customer = Customer()
-# customer.run_customer_panel()
+    

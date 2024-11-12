@@ -2,7 +2,7 @@ import json
 import os
 import random
 from datetime import datetime
-from tabulate import tabulate
+from tabulate import tabulate # type: ignore
 
 from src.models.json_files_path import load_menu
 from src.models.animation import loading
@@ -81,8 +81,12 @@ class Order:
             if not selected_item['availability']:
                 print("Sorry, this item is currently unavailable.")
                 continue
-
-            confirm = input(f"Is this the item '{selected_item['name']}' you'd like to order? (y/n): ").strip().lower()
+            while True:
+                confirm = input(f"Is this the item '{selected_item['name']}' you'd like to order? (y/n): ").strip().lower()
+                if confirm == 'y' or confirm == 'n':
+                    break
+                else:
+                    print('Invalid input! ')
             if confirm != 'y':
                 continue
 
