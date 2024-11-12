@@ -7,7 +7,8 @@
         "password": "surajsingh",
         "mobile": 9634912165,
         "role": "customer",
-        "joining_date": "05-11-2024"
+        "joining_date": "05-11-2024",
+        "blocked": "Account temporarily suspended for security reasons"
     },
     {
         "id": "83437730",

@@ -37,5 +37,12 @@
         "category": "drink",
         "price": 60.0,
         "availability": false
+    },
+    {
+        "name": "aalo pratha",
+        "category": "breakfast",
+        "price": 60.0,
+        "availability": true,
+        "half_price": 35.0
     }
 ]
