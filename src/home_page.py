@@ -1,5 +1,6 @@
 
 import uuid,datetime
+from colorama import Fore, Style
 
 import src.models.authentication as auth
 # importing class
@@ -67,10 +68,10 @@ def user_mobile_no():
             if len(mobile) == 10 and mobile.isdigit():
                 return int(mobile) 
             else:
-                print("Error: Mobile number must be exactly 10 digits.")
+                print(Fore.RED+"Error: Mobile number must be exactly 10 digits."+ Style.RESET_ALL)
         
         except ValueError:
-            print("Error: Invalid input. Please enter only digits.")
+            print(Fore.RED +"Error: Invalid input. Please enter only digits." + Style.RESET_ALL)
 
 def user_role():
     role = 'customer'
@@ -98,8 +99,8 @@ def create_customer_user():
 
 
 def login_users():
-    username = input("Enter your username: ")
-    password = input("Enter your password: ")
+    username = user_name()
+    password = input("Enter user password ")
     role = auth.authenticate_user(username, password)           
     
     
@@ -108,21 +109,21 @@ def login_users():
                 has_user_block = auth.user_block(username)
                 user = auth.get_user_from_db(username)
                 if has_user_block:
-                    print(f"You are block by our system with '{user['blocked']}' reason ")
+                    print(Fore.RED + f"You are block by our system with '{user['blocked']}' reason "+ Style.RESET_ALL)
                     return
                 
-                print("Login Successfully!\n")
+                print(Fore.GREEN+"Login Successfully!\n" + Style.RESET_ALL)
                 customer = Customer(user)
                 customer.run_customer_panel()
     if role == 'admin':
-                print("Login Successfully!\n")
+                print(Fore.GREEN+"Login Successfully!\n" + Style.RESET_ALL)
                 user = auth.get_user_from_db(username)
                 admin = Admin(user)
                 admin.run_admin_panel()
 
 def main_menu():
     """Main menu to choose between admin, customer, or Exit."""
-    print("\n==============* Welcome to the Restaurant Management System *==================")
+    print(Fore.GREEN + "\n==============* Welcome to the Restaurant Management System *=================="+ Style.RESET_ALL)
     while True:
         
         print("1. Sign Up")

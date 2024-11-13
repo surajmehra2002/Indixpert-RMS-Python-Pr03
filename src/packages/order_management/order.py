@@ -42,12 +42,14 @@ class Order:
         add_more = 'y'
 
         while add_more.lower() == 'y':
-            order_name = input("Search item for order: ").strip().lower()
+            order_name = input("Search item for order (press 0 for exit): ").strip().lower()
             ordered_items = [item for item in self.menu if order_name in item['name'].lower()]
-
+            
+            if order_name == '0':
+                break
             if not ordered_items:
                 print("Item not available. Please select an item from the available menu.\n")
-                break
+                
 
             print("Searching...", end="")
             loading()

@@ -1,6 +1,9 @@
 from src.models.json_files_path import load_users
 from src.models.json_files_path import save_user_when_signup
 
+from colorama import Fore, Style
+
+
 def get_user_from_db(username):
     found = False
     users = load_users()
@@ -9,7 +12,7 @@ def get_user_from_db(username):
             found = True
             return user
     if not found:
-        print("User not exist! Please Sign Up..")
+        print(Fore.RED+"User not exist! Please Sign Up.."+ Style.RESET_ALL)
        
        
 
@@ -25,7 +28,7 @@ def authenticate_user(username, password):
             else:
                 return "customer"
         else:
-            print("Invalid credentials")
+            print(Fore.RED +"Invalid credentials"+ Style.RESET_ALL)
 
 def user_block(username):
     user = get_user_from_db(username)
@@ -45,11 +48,11 @@ def sign_up_autentication(user_data):
         if user_data["user_email"]==user["user_email"]:
             found = True
         elif user_data['mobile'] == user['mobile']:
-            print("Mobile no already used! ")
+            print(Fore.YELLOW +"Mobile no already used! " + Style.RESET_ALL )
             break
             
     if found:   
-        print("User already exists")
+        print(Fore.YELLOW + "User already exists" + Style.RESET_ALL)
     else:
         users.append(user_data)
         save_user_when_signup(users)

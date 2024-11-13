@@ -16,7 +16,7 @@
         "user_email": "manoj@gmail.com",
         "password": "manojsingh",
         "mobile": 9634377090,
-        "role": "admin",
+        "role": "customer",
         "joining_date": "07-11-2024"
     },
     {
@@ -39,5 +39,15 @@
         "mobile": 8937805123,
         "role": "customer",
         "joining_date": "11-11-2024"
+    },
+    {
+        "id": "25c59da0",
+        "name": "nisha",
+        "username": "kalakoti",
+        "user_email": "nisha@gmail.com",
+        "password": "nisha12",
+        "mobile": 7830662013,
+        "role": "customer",
+        "joining_date": "13-11-2024"
     }
 ]

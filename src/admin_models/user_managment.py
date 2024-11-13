@@ -101,8 +101,21 @@ class Users:
         else:
             while True:
                 user_id = input("Enter user ID to block: (0 for cancel): ").strip()
-                if user_id == '0' or len(user_id)==8:
+                if user_id == '0':
                     break
+                    
+                elif len(user_id)==8:
+                    found = False
+                    for user in self.users:
+                        if user['id'] == user_id:
+                            break
+                        else:
+                            found = True
+                            
+                    if found:
+                        print("Invalid user ID! ")
+
+
                 elif len(user_id)<8 or len(user_id)>8:
                     print('User ID should 8 character')
                     continue
@@ -130,10 +143,4 @@ class Users:
             if not user_found:
                 print("User ID not found. Please try again.")
 
-# # Usage example:
-# users = [
-#     {"id": "2e38fdfc", "name": "suraj", "username": "suraj", "user_email": "suraj@gmail.com", "password": "surajsingh", "mobile": 9634912165, "role": "customer", "joining_date": "05-11-2024"},
-#     {"id": "83437730", "name": "manoj", "username": "manoj", "user_email": "manoj@gmail.com", "password": "manojsingh", "mobile": 9634377090, "role": "admin", "joining_date": "07-11-2024"}
-# ]
 
-# block_user(users)
