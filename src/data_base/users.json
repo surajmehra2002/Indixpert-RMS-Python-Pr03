@@ -48,6 +48,7 @@
         "password": "nisha12",
         "mobile": 7830662013,
         "role": "customer",
-        "joining_date": "13-11-2024"
+        "joining_date": "13-11-2024",
+        "blocked": "Multiple failed login attempts"
     }
 ]

@@ -15,14 +15,26 @@ class Menu:
 
     def update_menu_item(self):
         item_found = False
+        found = False
         while True:
-            found = False
-            item_name = input("Enter the item name which you want update: ").strip()
+            exit = False
+            item_name = input("Enter the item name which you want update (press 0 to exit): ").strip()
+            if item_name == '0':
+                exit = True
+                break
+            if item_name == '':
+                print("Empty item name not allow !")
             for item in self.items:
                 if item['name'].lower() == item_name.lower():
+                    break
+                else:
                     found = True
             if found:
-                break
+                print(f"Invalid item name {item_name} in your menu !")
+
+
+        if exit:
+            return
         
         for item in self.items:
             # Find the item by name (case-insensitive)
@@ -113,17 +125,25 @@ class Menu:
         if not self.items: #if list empty this this will excute
             print("Menu file not found.")
         else:
+            exit = False
             while True:
                 menu_name_list = [item['name'].lower() for item in self.items]
-                name = input("Enter item name: ").strip()
+                name = input("Enter item name (press 0 to exit): ").strip()
                 if name.lower() in menu_name_list:
                     print(f"ERROR: '{name}' already available in your menu! Add another...")
-                elif name == '':
-                    print("Invalid input! ")
+                elif name == '0':
+                    exit = True
+                    break
                 else:
                     break
+                    
+            if exit:
+                return
+            category = input("Enter item category (e.g., Pizza, Beverage) (press 0 to exit): ").strip()
 
-            category = input("Enter item category (e.g., Pizza, Beverage): ").strip()
+            if category == '0':
+                return
+                    
             
             # Check if the item has a half price option
             while True:

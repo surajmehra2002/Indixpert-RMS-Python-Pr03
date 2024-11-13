@@ -108,11 +108,12 @@ class Users:
                     found = False
                     for user in self.users:
                         if user['id'] == user_id:
-                            break
-                        else:
                             found = True
                             
+                        
                     if found:
+                        break       
+                    if not found:
                         print("Invalid user ID! ")
 
 
