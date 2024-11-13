@@ -38,19 +38,19 @@ class Customer:
                 self.order.payment_history()
                 
                                 
-            elif choice == '6':
-                print("ongoing..")
+            # elif choice == '6':
+            #     print("ongoing..")
                 
                                 
-            elif choice == '7':
+            elif choice == '6':
                 self.order.find_invoice()
                 
                                 
-            elif choice == '8':
-                print("ongoing..")      
+            # elif choice == '8':
+            #     print("ongoing..")      
                 
                                              
-            elif choice == '9':
+            elif choice == '7':
                 self.profile_info()
                 
                                 
