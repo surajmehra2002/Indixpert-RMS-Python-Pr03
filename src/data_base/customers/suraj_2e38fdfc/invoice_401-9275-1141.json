@@ -1,0 +1,26 @@
+{
+    "order_id": "401-9275-1141",
+    "date": "2024-11-12",
+    "time": "12:18",
+    "customer_details": {
+        "customer_id": "2e38fdfc",
+        "name": "suraj",
+        "email": "suraj@gmail.com",
+        "role": "customer"
+    },
+    "items": [
+        {
+            "name": "aalo pratha",
+            "quantity": 2,
+            "price_per_unit": 35.0,
+            "total_price": 70,
+            "type": "half"
+        }
+    ],
+    "sub_total": 70,
+    "gst_amount": 12.6,
+    "grand_total": 82,
+    "status": "Canceled",
+    "payment_method": "Cash",
+    "cancellation_reason": "Long delivery time"
+}

@@ -118,6 +118,8 @@ class Menu:
                 name = input("Enter item name: ").strip()
                 if name.lower() in menu_name_list:
                     print(f"ERROR: '{name}' already available in your menu! Add another...")
+                elif name == '':
+                    print("Invalid input! ")
                 else:
                     break
 
@@ -166,10 +168,20 @@ class Menu:
             if half_price is not None:
                 new_item["half_price"] = half_price
             self.items.append(new_item)
-            menu_update(self.items)
-            print(f"Item '{new_item['name']}' added successfully.")
-
+            confirm = input(f"Are you confirm to add {new_item['name']} item in menu(y/n): ")
             
+            while True:
+                if confirm == 'y':
+                    menu_update(self.items)
+                    print(f"Item '{new_item['name']}' added successfully.")
+                    break
+                
+                elif confirm == 'n':
+                    print('Canceled to add ')
+                    break
+
+                else:
+                    print('Invalid item! ')
 
             
 

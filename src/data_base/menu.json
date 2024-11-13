@@ -44,5 +44,98 @@
         "price": 60.0,
         "availability": true,
         "half_price": 35.0
+    },
+    {
+        "name": "choole bhature",
+        "category": "breakfast",
+        "price": 80.0,
+        "availability": true
+    },
+    {
+        "name": "roti",
+        "category": "breakfast",
+        "price": 8.0,
+        "availability": true
+    },
+    {
+        "name": "butter roti",
+        "category": "breakfast",
+        "price": 13.0,
+        "availability": true
+    },
+    {
+        "name": "slkjdf",
+        "category": "slkjdf",
+        "price": 12.0,
+        "availability": false
+    },
+    {
+        "name": "paneer butter masala",
+        "category": "main course",
+        "price": 190.0,
+        "availability": true
+    },
+    {
+        "name": "malai kofta",
+        "category": "main course",
+        "price": 210.0,
+        "availability": true
+    },
+    {
+        "name": "palak paneeer",
+        "category": "main course",
+        "price": 190.0,
+        "availability": true
+    },
+    {
+        "name": "stuff tomato",
+        "category": "main course",
+        "price": 240.0,
+        "availability": true
+    },
+    {
+        "name": "kadhai paneer",
+        "category": "main course",
+        "price": 180.0,
+        "availability": true
+    },
+    {
+        "name": "dosa",
+        "category": "breakfast",
+        "price": 100.0,
+        "availability": true,
+        "half_price": 60.0
+    },
+    {
+        "name": "masala dosa",
+        "category": "breakfast",
+        "price": 120.0,
+        "availability": true,
+        "half_price": 70.0
+    },
+    {
+        "name": "tea normal",
+        "category": "drink",
+        "price": 25.0,
+        "availability": true
+    },
+    {
+        "name": "coffie",
+        "category": "drink",
+        "price": 70.0,
+        "availability": true
+    },
+    {
+        "name": "hot chocolate",
+        "category": "drink",
+        "price": 180.0,
+        "availability": true
+    },
+    {
+        "name": "milk shake",
+        "category": "drink",
+        "price": 90.0,
+        "availability": true,
+        "half_price": 50.0
     }
 ]

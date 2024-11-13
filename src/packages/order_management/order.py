@@ -38,11 +38,6 @@ class Order:
                 print("Invalid choice. Please select a valid payment method.")
 
     def take_order(self):
-        # current_hour = datetime.now().hour
-
-        # if current_hour < 8 or current_hour >= 18:
-        #     print("Closed: Orders can only be placed between 8 AM and 6 PM.")
-        #     return
         items = []
         add_more = 'y'
 

@@ -6,9 +6,8 @@
         "user_email": "suraj@gmail.com",
         "password": "surajsingh",
         "mobile": 9634912165,
-        "role": "customer",
-        "joining_date": "05-11-2024",
-        "blocked": "Account temporarily suspended for security reasons"
+        "role": "admin",
+        "joining_date": "05-11-2024"
     },
     {
         "id": "83437730",

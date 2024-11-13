@@ -1,15 +1,10 @@
-import json,datetime
-import os
-import uuid
+
+import uuid,datetime
 
 import src.models.authentication as auth
-
-
-
-
 # importing class
-from src.models.customer import Customer
-from src.models.admin import Admin
+from src.access_control.customer import Customer
+from src.access_control.admin import Admin
 
 def generate_id():
     return str(uuid.uuid4())[0:8]
@@ -18,24 +13,6 @@ def generate_id():
 def save_user(user_data):
     auth.sign_up_autentication(user_data)
    
-           
-
-
-# def create_admin_user():
-#     """Create the first admin user if no users exist."""
-#     print("Creating a new admin user.")
-#     username = input("Enter admin username: ")
-#     password = input("Enter admin password: ")
-    
-#     admin_user = {
-#         "username": username,
-#         "password": password,
-#         "role": "admin"
-#     }
-    
-#     save_user(admin_user)
-#     print("admin user created successfully!")
-
 
 def user_email():
     import re
@@ -56,11 +33,14 @@ def user_first_name():
     return first_name
 def user_name():
     while True:
-            username = input("Enter your username: ").strip()
-            if username != "":
-                break
-            else:
-                print("username can't empty")
+        username = input("Enter your username: ").strip()
+        
+        if len(username) < 5:
+            print("Username must be at least 5 characters long.")
+        elif username == "":
+            print("Username can't be empty.")
+        else:
+            break
     return username
 
 def user_password():
@@ -84,9 +64,8 @@ def user_mobile_no():
         try:
             mobile = input("Enter your mobile number: ")
             
-            # Check if the input is a digit and is exactly 10 digits long
             if len(mobile) == 10 and mobile.isdigit():
-                return int(mobile)  # Loop breaks here when a valid number is entered
+                return int(mobile) 
             else:
                 print("Error: Mobile number must be exactly 10 digits.")
         
@@ -94,17 +73,6 @@ def user_mobile_no():
             print("Error: Invalid input. Please enter only digits.")
 
 def user_role():
-    
-    # while True:
-    #         conform = input("Are you admin (y/n)").strip().upper()
-    #         if conform == "Y":
-    #             role = "admin"
-    #             break
-    #         elif conform == "N":
-    #             role = "customer"
-    #             break
-    #         else:
-    #             print("Please enter valid input")  
     role = 'customer'
     return role
             

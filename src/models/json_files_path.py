@@ -1,6 +1,6 @@
 users_file_path = 'src/data_base/users.json'
 menu_file_path = 'src/data_base/menu.json'
-order_file_path = 'src/data_base/customer'
+order_file_path = 'src/data_base/customers'
 
 import os, json
 def menu_update(menu):
@@ -49,4 +49,20 @@ def load_all_invoices_of_an_user(directory):
         pass
     return invoices_list
 
+def get_all_invoices():
+    invoices = []
 
+    # Traverse all subdirectories and files in the root_folder
+    for subdir, _, files in os.walk(order_file_path):
+        for file in files:
+            if file.startswith("invoice") and file.endswith(".json"):
+                file_path = os.path.join(subdir, file)
+                # Read the JSON content from the invoice file
+                try:
+                    with open(file_path, 'r') as f:
+                        invoice_data = json.load(f)
+                        invoices.append(invoice_data)
+                except Exception as e:
+                    print(f"Error reading {file_path}: {e}")
+    
+    return invoices

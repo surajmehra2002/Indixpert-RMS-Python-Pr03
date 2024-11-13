@@ -1,8 +1,9 @@
-# users/admin.py
-import json
+
 
 from src.packages.menu_management.menu import Menu
 from src.admin_models.user_managment import Users
+from src.admin_models.order_managment import Orders
+from src.admin_models.admin_panel_model import AdminPanelModel
 
 
 class Admin:
@@ -10,21 +11,12 @@ class Admin:
         self.user = user
         self.menu = Menu()
         self.users = Users()
+        self.orders = Orders()
+        self.panel = AdminPanelModel()
 
     def run_admin_panel(self):
-        print("Admin dashboard")
-        print("-"*40)
         while True:
-            
-            print("1. View menu")
-            print("2. Add menu item")
-            print("3. Update menu item")
-            print("4. User Managment")
-            print("5. Order status")
-            print("6. Payment history")
-            print("7. Refund request")
-            print("8. Profile informaion")
-            print("0. log out")
+            self.panel.display_dashboard()
             choice = input("Enter your choice: ")
             if choice == '1':
                 self.menu.display_menu()
@@ -38,10 +30,10 @@ class Admin:
             elif choice == '4':
                 self.user_managment()
             elif choice == '5':
-                pass
+                self.orders.display_order_details()
                 
                 input("Press 'Enter' to show the Dashboard")
-            elif choice == '8':
+            elif choice == '6':
                 self.profile_info()
                 input("Press 'Enter' to show the Dashboard")
 
@@ -62,21 +54,17 @@ class Admin:
 
     def user_managment(self):
         while True:
-            print("\n\n1. View all customer")
-            print("2. Customer information")
-            print("3. Remove user")
-            print("4. Create admin")
-            print("0. Back")
+            self.panel.user_managment_dashboard()
 
             choice = input("Enter your choice: ")
             if choice == '1':
-                self.users.view_all_customer()
+                self.users.view_all_users()
             elif choice == '2':
-                self.users.customer_info()
-            elif choice == '3':
                 self.users.block_user()
+            elif choice == '3':
+                self.users.promote_user_to_admin()
             elif choice == '4':
-                self.users.create_admin()
+                self.users.remove_user_from_admin()
             elif choice == '0':
                 break
             else:

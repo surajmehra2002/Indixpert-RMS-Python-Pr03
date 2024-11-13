@@ -1,4 +1,3 @@
-import os,json
 from src.models.json_files_path import load_users
 from src.models.json_files_path import save_user_when_signup
 
@@ -45,6 +44,9 @@ def sign_up_autentication(user_data):
     for user in users:
         if user_data["user_email"]==user["user_email"]:
             found = True
+        elif user_data['mobile'] == user['mobile']:
+            print("Mobile no already used! ")
+            break
             
     if found:   
         print("User already exists")
@@ -55,8 +57,3 @@ def sign_up_autentication(user_data):
         print(f"successfully {user_data["role"]} account created!")
 
             
-
-
-       
-# if __name__=="__main__":
-#     authenticate_user("deep", "singh")
