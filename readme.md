@@ -1,1 +1,4 @@
-install thease modules before run:  1. maskpass, 2. tabulate
+install thease modules before run: 
+pip install colorama
+pip install maskpass
+pip install tabulate
