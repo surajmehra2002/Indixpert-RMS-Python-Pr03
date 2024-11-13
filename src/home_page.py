@@ -1,5 +1,6 @@
 
 import uuid,datetime
+import maskpass # type: ignore
 from colorama import Fore, Style # type: ignore
 
 import src.models.authentication as auth
@@ -46,13 +47,13 @@ def user_name():
 
 def user_password():
     while True:
-        password = input("Enter your password (min 6 characters): ").strip()
+        password = maskpass.askpass(prompt="Enter your password (min 6 characters): ", mask="*").strip()
         
         if len(password) < 6:
             print("Password must be at least 6 characters long.")
             continue
         
-        confirm_password = input("Confirm your password: ").strip()
+        confirm_password = maskpass.askpass(prompt="Confirm your password", mask="*").strip()
         
         if confirm_password != password:
             print("Passwords do not match. Please try again.")
@@ -100,7 +101,7 @@ def create_customer_user():
 
 def login_users():
     username = user_name()
-    password = input("Enter user password ")
+    password = maskpass.askpass(prompt="Enter your password: ", mask="*")
     role = auth.authenticate_user(username, password)           
     
     
