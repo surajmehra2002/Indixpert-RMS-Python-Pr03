@@ -1,6 +1,6 @@
 
 import uuid,datetime
-from colorama import Fore, Style
+from colorama import Fore, Style # type: ignore
 
 import src.models.authentication as auth
 # importing class

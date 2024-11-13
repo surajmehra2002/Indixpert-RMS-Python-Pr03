@@ -1,4 +1,4 @@
-from colorama import Fore, Style
+from colorama import Fore, Style # type: ignore
 
 from src.packages.menu_management.menu import Menu
 from src.packages.order_management.order import Order

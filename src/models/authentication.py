@@ -1,7 +1,7 @@
 from src.models.json_files_path import load_users
 from src.models.json_files_path import save_user_when_signup
 
-from colorama import Fore, Style
+from colorama import Fore, Style # type: ignore
 
 
 def get_user_from_db(username):
