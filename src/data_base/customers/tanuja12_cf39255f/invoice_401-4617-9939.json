@@ -1,0 +1,24 @@
+{
+    "order_id": "401-4617-9939",
+    "date": "2024-11-13",
+    "time": "16:12",
+    "customer_details": {
+        "customer_id": "cf39255f",
+        "name": "tanuja12",
+        "email": "gariyatanu68@gmail.com",
+        "role": "customer"
+    },
+    "items": [
+        {
+            "name": "egg pizza",
+            "quantity": 1,
+            "price_per_unit": 460.0,
+            "total_price": 460
+        }
+    ],
+    "sub_total": 460,
+    "gst_amount": 82.8,
+    "grand_total": 542,
+    "status": "Order Placed",
+    "payment_method": "UPI"
+}
