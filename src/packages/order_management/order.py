@@ -41,10 +41,21 @@ class Order:
         items = []
         add_more = 'y'
 
-        while add_more.lower() == 'y':
+        while True:  # Use an infinite loop and control exiting explicitly
+            if add_more.lower() == 'n':
+                confirm_exit = input("Do you want to finish your order? (y/n): ").strip().lower()
+                if confirm_exit == 'y':
+                    break
+                elif confirm_exit == 'n':
+                    add_more = 'y'  # Reset add_more to continue ordering
+                    continue
+                else:
+                    print("Invalid input. Please type 'y' or 'n'.")
+                    continue
+
             order_name = input("Search item for order (press 0 for exit): ").strip().lower()
             ordered_items = [item for item in self.menu if order_name in item['name'].lower()]
-            
+
             if order_name == '0':
                 break
             if not ordered_items:
@@ -78,7 +89,7 @@ class Order:
             if not selected_item['availability']:
                 print("Sorry, this item is currently unavailable.")
                 continue
-            
+
             while True:
                 confirm = input(f"Is this the item '{selected_item['name']}' you'd like to order? (y/n): ").strip().lower()
                 if confirm == 'y' or confirm == 'n':
@@ -87,6 +98,7 @@ class Order:
                     print('Invalid input! ')
             if confirm != 'y':
                 continue
+
             if 'half_price' in selected_item:
                 def order_type():
                     while True:
@@ -109,11 +121,10 @@ class Order:
                     return selected_item['half_price']
                 else:
                     return selected_item['price']
-            
+
             total_price = base_price() * quantity
 
             item_entry = {
-                
                 "name": selected_item['name'],
                 "quantity": quantity,
                 "price_per_unit": base_price(),
@@ -121,15 +132,12 @@ class Order:
             }
             if 'half_price' in selected_item and order_size == 'half':
                 item_entry["type"] = "half"
-            if len(items)>=0:
-                for item in items:
-                    if item['name']==selected_item['name']:
-                        item['quantity']+=item_entry['quantity']
-                        item['total_price']+=item_entry['total_price']
-                        
-                    else:
-                        items.append(item_entry)
-                        
+
+            # Combine quantities and prices for the same item
+            existing_item = next((item for item in items if item['name'] == selected_item['name']), None)
+            if existing_item:
+                existing_item['quantity'] += item_entry['quantity']
+                existing_item['total_price'] += item_entry['total_price']
             else:
                 items.append(item_entry)
 
@@ -178,7 +186,6 @@ class Order:
                 print("Order placed successfully!")
             else:
                 print("Order cancelled.")
-
 
   
 

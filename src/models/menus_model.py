@@ -1,7 +1,7 @@
 class MenuModel:
     def customer_panel_model(self):
             print("1. View menu")
-            print("2. Take new order")
+            print("2. Take order")
             print("3. View ongoing order")
             print("4. Cancel order")
             print("5. Payment history")
