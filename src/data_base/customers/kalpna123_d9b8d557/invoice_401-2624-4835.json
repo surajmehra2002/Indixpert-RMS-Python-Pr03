@@ -1,0 +1,30 @@
+{
+    "order_id": "401-2624-4835",
+    "date": "2024-11-14",
+    "time": "17:09",
+    "customer_details": {
+        "customer_id": "d9b8d557",
+        "name": "kalpna123",
+        "email": "kalpna@gmail.com",
+        "role": "customer"
+    },
+    "items": [
+        {
+            "name": "BBQ Chicken Pizza",
+            "quantity": 3,
+            "price_per_unit": 1100.0,
+            "total_price": 3300
+        },
+        {
+            "name": "BBQ Chicken Pizza",
+            "quantity": 9,
+            "price_per_unit": 1100.0,
+            "total_price": 9900
+        }
+    ],
+    "sub_total": 13200,
+    "gst_amount": 2376.0,
+    "grand_total": 15576,
+    "status": "Order Placed",
+    "payment_method": "Net Banking"
+}

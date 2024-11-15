@@ -1,0 +1,24 @@
+{
+    "order_id": "401-9645-6585",
+    "date": "2024-11-14",
+    "time": "18:12",
+    "customer_details": {
+        "customer_id": "d9b8d557",
+        "name": "kalpna123",
+        "email": "kalpna@gmail.com",
+        "role": "customer"
+    },
+    "items": [
+        {
+            "name": "water",
+            "quantity": 30,
+            "price_per_unit": 20.0,
+            "total_price": 600
+        }
+    ],
+    "sub_total": 600,
+    "gst_amount": 108.0,
+    "grand_total": 708,
+    "status": "Order Placed",
+    "payment_method": "Card"
+}

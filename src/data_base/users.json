@@ -50,5 +50,15 @@
         "role": "customer",
         "joining_date": "13-11-2024",
         "blocked": "Multiple failed login attempts"
+    },
+    {
+        "id": "d9b8d557",
+        "name": "kalpna",
+        "username": "kalpna123",
+        "user_email": "kalpna@gmail.com",
+        "password": "kalpna123",
+        "mobile": 9999888877,
+        "role": "customer",
+        "joining_date": "14-11-2024"
     }
 ]

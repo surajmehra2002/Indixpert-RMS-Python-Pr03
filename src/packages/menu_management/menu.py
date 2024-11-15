@@ -24,12 +24,14 @@ class Menu:
                 break
             if item_name == '':
                 print("Empty item name not allow !")
+                continue
             for item in self.items:
                 if item['name'].lower() == item_name.lower():
-                    break
-                else:
                     found = True
+                    break
             if found:
+                break
+            else:
                 print(f"Invalid item name {item_name} in your menu !")
 
 

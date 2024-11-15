@@ -49,7 +49,7 @@ class Order:
                 break
             if not ordered_items:
                 print("Item not available. Please select an item from the available menu.\n")
-                
+                continue
 
             print("Searching...", end="")
             loading()
@@ -78,6 +78,7 @@ class Order:
             if not selected_item['availability']:
                 print("Sorry, this item is currently unavailable.")
                 continue
+            
             while True:
                 confirm = input(f"Is this the item '{selected_item['name']}' you'd like to order? (y/n): ").strip().lower()
                 if confirm == 'y' or confirm == 'n':
@@ -86,8 +87,6 @@ class Order:
                     print('Invalid input! ')
             if confirm != 'y':
                 continue
-
-            # Check if the item has a half price; if not, skip order type selection
             if 'half_price' in selected_item:
                 def order_type():
                     while True:
@@ -122,8 +121,17 @@ class Order:
             }
             if 'half_price' in selected_item and order_size == 'half':
                 item_entry["type"] = "half"
-
-            items.append(item_entry)
+            if len(items)>=0:
+                for item in items:
+                    if item['name']==selected_item['name']:
+                        item['quantity']+=item_entry['quantity']
+                        item['total_price']+=item_entry['total_price']
+                        
+                    else:
+                        items.append(item_entry)
+                        
+            else:
+                items.append(item_entry)
 
             add_more = input("Would you like to order another item? (y/n): ").strip().lower()
 
