@@ -39,24 +39,29 @@ def user_block(username):
     else:
         return False
 
-
-def sign_up_autentication(user_data):
+def sign_up_authentication(user_data):
     users = load_users()
-    found = False
+    
+    # Check if email or mobile number already exists
+    email_exists = False
+    mobile_exists = False
 
     for user in users:
-        if user_data["user_email"]==user["user_email"]:
-            found = True
-        elif user_data['mobile'] == user['mobile']:
-            print(Fore.YELLOW +"Mobile no already used! " + Style.RESET_ALL )
+        if user_data["user_email"] == user["user_email"]:
+            email_exists = True
+        if user_data["mobile"] == user["mobile"]:
+            mobile_exists = True
+        # Break early if both are found
+        if email_exists or mobile_exists:
             break
-            
-    if found:   
-        print(Fore.YELLOW + "User already exists" + Style.RESET_ALL)
+
+    # Display appropriate messages
+    if email_exists:
+        print(Fore.YELLOW + "User with this email already exists." + Style.RESET_ALL)
+    elif mobile_exists:
+        print(Fore.YELLOW + "Mobile number already used!" + Style.RESET_ALL)
     else:
+        # Add user and save to database
         users.append(user_data)
         save_user_when_signup(users)
-          
-        print(f"successfully {user_data["role"]} account created!")
-
-            
+        print(f"Successfully created {user_data['role']} account!")

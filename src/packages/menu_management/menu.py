@@ -1,18 +1,60 @@
 
 
-import json
-import os
 
-
-from src.models.json_files_path import load_menu
 from src.models.json_files_path import menu_update
+from src.models.json_files_path import load_menu
 
 class Menu:
     def __init__(self):
         self.items = load_menu()   
     
-    import json
+    
+    def delete_menu_item(self):
+        while True:  # Keep the function running until valid input or cancel
+            # Asking for search input to match menu items
+            search_term = input("Enter the name of the menu item to delete (min 3 characters): ").strip()
+            
+            if len(search_term) < 3:
+                print("Search term must be at least 3 characters.")
+                continue  # Keep asking for a valid search term
 
+            # Filtering the items that match the search term
+            matching_items = [item for item in self.items if search_term.lower() in item['name'].lower()]
+            
+            if not matching_items:
+                print("No menu items found matching that name.")
+                continue  # Keep asking for a valid search term
+
+            # Display the matching items with index
+            print("\nMatching menu items:")
+            for idx, item in enumerate(matching_items, 1):
+                print(f"{idx}. {item['name']} - {item['category']}")
+
+            # Ask for the index of the item to delete
+            try:
+                item_idx = int(input("\nEnter the index of the item to delete (0 to cancel): "))
+                if item_idx == 0:
+                    print("Cancelled deletion.")
+                    break  # Exit the function when pressing 0
+                elif 1 <= item_idx <= len(matching_items):
+                    # Get the item to delete
+                    item_to_delete = matching_items[item_idx - 1]
+                    self.items = [item for item in self.items if item != item_to_delete]
+                    
+                    # Save the updated menu back to the JSON file
+                    menu_update(self.items)
+                    print(f"Menu item '{item_to_delete['name']}' has been deleted.")
+                    break  # Exit the function after successful deletion
+                else:
+                    print("Invalid index. Please select a valid index.")
+            except ValueError:
+                print("Invalid input. Please enter a valid number.")
+
+
+   
+
+
+    
     def update_menu_item(self):
         item_found = False
         found = False

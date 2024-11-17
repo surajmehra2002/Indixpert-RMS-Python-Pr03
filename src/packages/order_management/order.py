@@ -226,7 +226,7 @@ class Order:
             for invoice in invoices_list:
                 if invoice['order_id'] == order_id:
                     order_found = True
-                    if invoice['status']!='Canceled':
+                    if invoice['status']!='Canceled/Refunded':
                         while True:
                             print("Why do you want to cancel this order?")
                             print("0. Go back to main menu")
@@ -254,7 +254,8 @@ class Order:
                             
                             if cancellation_reason:
                                 # Update the status to "Canceled" and add the reason
-                                invoice['status'] = 'Canceled'
+                                invoice['status'] = 'Canceled/Refunded'
+                                invoice['order_cancel_by'] = 'self'
                                 invoice['cancellation_reason'] = cancellation_reason
                                 
                                 # Write the updated invoice back to the file

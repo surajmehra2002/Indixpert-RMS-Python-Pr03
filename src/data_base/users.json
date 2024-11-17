@@ -38,7 +38,8 @@
         "password": "yogesh",
         "mobile": 8937805123,
         "role": "customer",
-        "joining_date": "11-11-2024"
+        "joining_date": "11-11-2024",
+        "blocked": "Violation of terms and conditions"
     },
     {
         "id": "25c59da0",
@@ -48,8 +49,7 @@
         "password": "nisha12",
         "mobile": 7830662013,
         "role": "customer",
-        "joining_date": "13-11-2024",
-        "blocked": "Multiple failed login attempts"
+        "joining_date": "13-11-2024"
     },
     {
         "id": "d9b8d557",

@@ -55,8 +55,13 @@ class Customer:
                 
                                 
             elif choice == '0':
-                print("Log out Successfully!\n")
-                break
+                confirm = input("Are you sure you want to log out? (yes/no): ").strip().lower()
+                if confirm == 'yes':
+                    print("Logged out successfully.\n")
+                    break
+                else:
+                    print("Logout canceled. Returning to the dashboard.")
+                    continue
             else:
                 print(Fore.RED+'OPTION ERROR: Invalid option'+ Style.RESET_ALL)
 

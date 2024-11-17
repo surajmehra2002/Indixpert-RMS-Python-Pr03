@@ -27,12 +27,6 @@
         "availability": true
     },
     {
-        "name": "milk",
-        "category": "drink",
-        "price": 40.0,
-        "availability": true
-    },
-    {
         "name": "jaljeera",
         "category": "drink",
         "price": 60.0,
@@ -132,10 +126,10 @@
         "availability": true
     },
     {
-        "name": "milk shake",
-        "category": "drink",
-        "price": 90.0,
+        "name": "daal",
+        "category": "lunch",
+        "price": 120.0,
         "availability": true,
-        "half_price": 50.0
+        "half_price": 80.0
     }
 ]
