@@ -5,6 +5,85 @@ class Orders:
     def __init__(self):
         self.orders = get_all_invoices()
 
+
+    def cancel_order(self):
+        try:
+            # Ensure orders are loaded
+            if not self.orders:
+                print("No orders available to cancel.")
+                return
+
+            # Display all orders for admin to choose from
+            print("\n--- All Orders ---")
+            for order in self.orders:
+                print(f"Order ID: {order['order_id']} | Customer: {order['customer_details']['name']} | Status: {order['status']}")
+
+            # Prompt admin for order ID to cancel
+            order_id = input("\nEnter the Order ID to cancel: ").strip()
+
+            # Find the order
+            order_to_cancel = next((order for order in self.orders if order['order_id'] == order_id), None)
+
+            if not order_to_cancel:
+                print(f"No order found with ID: {order_id}")
+                return
+
+            # Check if the order is already canceled
+            if order_to_cancel['status'] == 'Canceled/Refunded':
+                print(f"Order {order_id} is already canceled by {order_to_cancel['order_cancel_by']}")
+                return
+
+            # Display predefined cancellation reasons
+            predefined_reasons = [
+                "Customer request",
+                "Item out of stock",
+                "Payment issue",
+                "Other"
+            ]
+            print("\n--- Cancellation Reasons ---")
+            for idx, reason in enumerate(predefined_reasons, start=1):
+                print(f"{idx}. {reason}")
+
+            # Prompt for reason
+            reason_choice = int(input("Select a reason for cancellation (1-4): "))
+            if reason_choice < 1 or reason_choice > 4:
+                print("Invalid choice. Cancellation aborted.")
+                return
+
+            cancellation_reason = predefined_reasons[reason_choice - 1]
+
+            # Update the order status and reason
+            order_to_cancel['status'] = 'Canceled/Refunded'
+            order_to_cancel['order_cancel_by'] = 'admin'
+            order_to_cancel['cancellation_reason'] = cancellation_reason
+
+            user_directory = f"{order['customer_details']['name']}_{order['customer_details']['customer_id']}"
+            directory = f'src/data_base/customers/{user_directory}/'  # Path to the directory where invoice files are stored
+
+            with open(os.path.join(directory, f"invoice_{order_id}.json"), 'w') as file:
+                json.dump(order_to_cancel, file, indent=4)
+            print(f"Order {order_id} has been successfully canceled.")
+
+        except ValueError:
+            print("Invalid input. Please try again.")
+        except Exception as e:
+            print(f"An error occurred: {str(e)}")
+
+
+    def totle_Ongoing_order(self):
+        found = False
+        for order in self.orders:
+            if order['status']=='Order Placed':
+                found = True
+                break
+        if found:
+            print(f"\n{'Order ID':<20}{'Ordered By':<25}{'Order date':<15}{'Payment method':<20}{'Status'}")            
+            for order in self.orders:
+                if order['status']=='Order Placed':
+                    print(f"{order['order_id']:<20}{order['customer_details']['email']:<25}{order['date']:<15}{order['payment_method']:<20}{order['status']}")
+        else:
+            print("No orders placed yet!")
+
     def totle_completed_order(self):
         found = False
         for order in self.orders:

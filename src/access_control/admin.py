@@ -6,7 +6,7 @@ from src.admin_models.order_managment import Orders
 from src.admin_models.admin_panel_model import AdminPanelModel
 
 # function(module)
-from src.admin_models.order_traker import track_total_order_info
+from src.admin_models.order_traker import analytical
 
 
 class Admin:
@@ -22,7 +22,7 @@ class Admin:
             self.panel.display_dashboard()
             choice = input("Enter your choice: ")
             if choice == '1':
-                print("ongoing")
+                analytical()
                 input("Press 'Enter' to show the Dashboard")
             elif choice == '2':
                 self.menu_managment()
@@ -124,7 +124,7 @@ class Admin:
                 input("Press 'Enter' to show the Dashboard")
 
             elif choice == '2':
-                # totle_Ongoing_order()
+                self.orders.totle_Ongoing_order()
                 input("Press 'Enter' to show the Dashboard")
 
             elif choice == '3':

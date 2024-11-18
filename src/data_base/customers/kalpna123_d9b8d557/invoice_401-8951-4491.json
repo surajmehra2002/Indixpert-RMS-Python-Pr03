@@ -1,0 +1,33 @@
+{
+    "order_id": "401-8951-4491",
+    "date": "2024-11-18",
+    "time": "12:20",
+    "customer_details": {
+        "customer_id": "d9b8d557",
+        "name": "kalpna123",
+        "email": "kalpna@gmail.com",
+        "role": "customer"
+    },
+    "items": [
+        {
+            "name": "roti",
+            "quantity": 15,
+            "price_per_unit": 8.0,
+            "total_price": 120
+        },
+        {
+            "name": "aalo pratha",
+            "quantity": 5,
+            "price_per_unit": 35.0,
+            "total_price": 175,
+            "type": "half"
+        }
+    ],
+    "sub_total": 295,
+    "gst_amount": 53.1,
+    "grand_total": 348,
+    "status": "Canceled/Refunded",
+    "payment_method": "UPI",
+    "order_cancel_by": "self",
+    "cancellation_reason": "Ordered by mistake"
+}

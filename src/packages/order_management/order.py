@@ -255,7 +255,7 @@ class Order:
                             if cancellation_reason:
                                 # Update the status to "Canceled" and add the reason
                                 invoice['status'] = 'Canceled/Refunded'
-                                invoice['order_cancel_by'] = 'self'
+                                invoice['order_cancel_by'] = 'customer'
                                 invoice['cancellation_reason'] = cancellation_reason
                                 
                                 # Write the updated invoice back to the file
