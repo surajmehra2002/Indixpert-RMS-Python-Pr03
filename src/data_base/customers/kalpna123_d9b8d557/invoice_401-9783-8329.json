@@ -1,0 +1,38 @@
+{
+    "order_id": "401-9783-8329",
+    "date": "2024-11-19",
+    "time": "01:33",
+    "customer_details": {
+        "customer_id": "d9b8d557",
+        "name": "kalpna123",
+        "email": "kalpna@gmail.com",
+        "role": "customer"
+    },
+    "items": [
+        {
+            "name": "water",
+            "quantity": 5,
+            "price_per_unit": 20.0,
+            "total_price": 100
+        },
+        {
+            "name": "butter roti",
+            "quantity": 20,
+            "price_per_unit": 13.0,
+            "total_price": 260
+        },
+        {
+            "name": "palak paneeer",
+            "quantity": 5,
+            "price_per_unit": 190.0,
+            "total_price": 950
+        }
+    ],
+    "sub_total": 1310,
+    "gst_amount": 235.79999999999998,
+    "grand_total": 1545,
+    "status": "Canceled/Refunded",
+    "payment_method": "Card",
+    "order_cancel_by": "admin",
+    "cancellation_reason": "Customer request"
+}

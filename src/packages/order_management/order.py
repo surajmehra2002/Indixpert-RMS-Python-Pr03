@@ -7,6 +7,8 @@ from tabulate import tabulate # type: ignore
 from src.models.json_files_path import load_menu
 from src.models.animation import loading
 from src.models.json_files_path import load_all_invoices_of_an_user
+from src.models.json_files_path import load_tracker
+from src.models.json_files_path import tracker_update
 
 
 
@@ -113,7 +115,15 @@ class Order:
             else:
                 order_size = "full"
 
-            quantity = int(input("Enter quantity: "))
+            while True:
+                try:
+                    quantity = int(input("Enter quantity: "))
+                    if quantity <= 0:
+                        print("Quantity must be a positive number.")
+                        continue
+                    break
+                except ValueError:
+                    print("Invalid input! Please enter a numeric value.")
 
             # Determine the base price based on order type
             def base_price():
@@ -141,7 +151,12 @@ class Order:
             else:
                 items.append(item_entry)
 
-            add_more = input("Would you like to order another item? (y/n): ").strip().lower()
+            while True:
+                add_more = input("Would you like to order another item? (y/n): ").strip().lower()
+                if add_more == 'y' or add_more == 'n':
+                    break  # Exit the loop if the input is either 'y' or 'n'
+                else:
+                    print("Invalid input! Please enter 'y' for yes or 'n' for no.")
 
         if items:  # Ensure there are items to process
             sub_total = sum(item['total_price'] for item in items)
@@ -181,6 +196,12 @@ class Order:
                 os.makedirs(os.path.dirname(file_path), exist_ok=True)
                 with open(file_path, 'w') as invoice_file:
                     json.dump(invoice_data, invoice_file, indent=4)
+
+                data = load_tracker()
+                data[0]["total_revenue"] += invoice_data["grand_total"]
+                data[0]["order_status"]["Order Placed"] += 1
+                tracker_update(data)
+                
 
                 print(f"SMS: You have paid ₹{grand_total:.2f} including GST.")
                 print("Order placed successfully!")
@@ -227,6 +248,9 @@ class Order:
                 if invoice['order_id'] == order_id:
                     order_found = True
                     if invoice['status']!='Canceled/Refunded':
+                        if invoice['status']=='delivered':
+                            print(f"Error: Order {order_id} has delivered and cannot be canceled.")
+                            return
                         while True:
                             print("Why do you want to cancel this order?")
                             print("0. Go back to main menu")
@@ -261,6 +285,13 @@ class Order:
                                 # Write the updated invoice back to the file
                                 with open(os.path.join(directory, f"invoice_{order_id}.json"), 'w') as file:
                                     json.dump(invoice, file, indent=4)
+                                
+                                # update analysis file
+                                data = load_tracker()
+                                data[0]["total_refunds"] += invoice['grand_total']
+                                data[0]["order_status"]["canceled/refunded"] += 1
+                                data[0]["order_status"]["Order Placed"] -= 1
+                                tracker_update(data)
                                 
                                 print(f"Order {order_id} has been canceled for the following reason: {cancellation_reason}")
                                 break

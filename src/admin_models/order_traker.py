@@ -1,15 +1,13 @@
 
-import json
+from src.models.json_files_path import load_tracker
 def analytical():
+    data_list = load_tracker()
+    if not data_list:
+        print("Tracking not available..")
+        return
+    data = data_list[0]
 
     try:
-        # Path to the status_count JSON file
-        status_count_file = 'src/data_base/status_count.json'
-        
-        # Load status_count data
-        with open(status_count_file, 'r') as file:
-            data = json.load(file)
-
         # Extract details
         total_revenue = data.get('total_revenue', 0.00)
         total_refunds = data.get('total_refunds', 0.00)
@@ -19,10 +17,11 @@ def analytical():
         total_orders = sum(order_status.values())
 
         # Insights
-        print("\n--- Business status_count ---")
-        print(f"Total Revenue: ₹{total_revenue:,.2f}")
-        print(f"Total Refunds: ₹{total_refunds:,.2f}")
-        print(f"Total Orders: {total_orders}")
+        print("\nBusiness Analytics Report")
+        print("-------------------------------------")
+        print(f"{'Total Revenue:':<20} ₹{total_revenue:,.2f}")
+        print(f"{'Total Refunds:':<20} ₹{total_refunds:,.2f}")
+        print(f"{'Total Orders:':<20} {total_orders}")
         print("\n--- Order Status Breakdown ---")
         for status, count in order_status.items():
             percentage = (count / total_orders) * 100 if total_orders > 0 else 0
@@ -30,12 +29,12 @@ def analytical():
         
         # Refund Analysis
         refund_percentage = (total_refunds / total_revenue) * 100 if total_revenue > 0 else 0
-        print(f"\nRefund Percentage: {refund_percentage:.2f}%")
+        print(f"\n{'Refund Percentage:':<20} {refund_percentage:.2f}%")
         
         # Order Completion Rate
         completed_orders = order_status.get("completed", 0)
         completion_rate = (completed_orders / total_orders) * 100 if total_orders > 0 else 0
-        print(f"Order Completion Rate: {completion_rate:.2f}%")
+        print(f"{'Order Completion Rate:':<20} {completion_rate:.2f}%")
         
         # Business Trend
         print("\n--- Business Trend ---")
@@ -47,8 +46,11 @@ def analytical():
             print("Low order completion rate. Improve customer experience or address order fulfillment issues.")
         else:
             print("Business is stable but has room for improvement.")
+        print('--------------------------------------\n')
 
-    except FileNotFoundError:
-        print("status_count data file not found. Please ensure the file exists at the specified location.")
     except Exception as e:
         print(f"An error occurred during analysis: {str(e)}")
+
+
+# def update_analysis():
+#     pass

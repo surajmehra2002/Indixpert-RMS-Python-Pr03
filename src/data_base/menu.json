@@ -9,8 +9,8 @@
     {
         "name": "Pepperoni Pizza",
         "category": "Pizza",
-        "half_price": 700.0,
-        "price": 1200.0,
+        "half_price": 550.0,
+        "price":800.0,
         "availability": true
     },
     {
@@ -57,12 +57,7 @@
         "price": 13.0,
         "availability": true
     },
-    {
-        "name": "slkjdf",
-        "category": "slkjdf",
-        "price": 12.0,
-        "availability": false
-    },
+    
     {
         "name": "paneer butter masala",
         "category": "main course",

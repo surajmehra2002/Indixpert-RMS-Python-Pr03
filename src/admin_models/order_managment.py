@@ -1,6 +1,9 @@
 import os,json
 
 from src.models.json_files_path import get_all_invoices
+from src.models.json_files_path import load_tracker
+from src.models.json_files_path import tracker_update
+
 class Orders:
     def __init__(self):
         self.orders = get_all_invoices()
@@ -32,6 +35,9 @@ class Orders:
             if order_to_cancel['status'] == 'Canceled/Refunded':
                 print(f"Order {order_id} is already canceled by {order_to_cancel['order_cancel_by']}")
                 return
+            if order_to_cancel['status'] == 'delivered':
+                print(f"Error: Order {order_id} has delivered and cannot be canceled.")
+                return
 
             # Display predefined cancellation reasons
             predefined_reasons = [
@@ -62,6 +68,14 @@ class Orders:
 
             with open(os.path.join(directory, f"invoice_{order_id}.json"), 'w') as file:
                 json.dump(order_to_cancel, file, indent=4)
+
+            # update analysis file
+            data = load_tracker()
+            data[0]["total_refunds"] += order_to_cancel['grand_total']
+            data[0]["order_status"]["canceled/refunded"] += 1
+            data[0]["order_status"]["Order Placed"] -= 1
+            tracker_update(data)
+
             print(f"Order {order_id} has been successfully canceled.")
 
         except ValueError:
@@ -124,6 +138,12 @@ class Orders:
                             # Write the updated invoice back to the file
                             with open(os.path.join(directory, f"invoice_{order['order_id']}.json"), 'w') as file:
                                 json.dump(order, file, indent=4)
+
+                            # update analysis file
+                            data = load_tracker()
+                            data[0]["order_status"]["completed"] += 1
+                            data[0]["order_status"]["Order Placed"] -= 1
+                            tracker_update(data)
 
                             print(f"Order ID '{order_id}' has been successfully marked as delivered.")
                         else:

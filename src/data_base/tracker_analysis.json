@@ -1,0 +1,11 @@
+[
+    {
+        "total_revenue": 8471.0,
+        "total_refunds": 2253.0,
+        "order_status": {
+            "completed": 2,
+            "canceled/refunded": 2,
+            "Order Placed": 0
+        }
+    }
+]

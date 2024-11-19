@@ -60,5 +60,25 @@
         "mobile": 9999888877,
         "role": "customer",
         "joining_date": "14-11-2024"
+    },
+    {
+        "id": "00f2eb0c",
+        "name": "kailash",
+        "username": "kailash123",
+        "user_email": "kailash@gmail.com",
+        "password": "kailash123",
+        "mobile": 9999999999,
+        "role": "customer",
+        "joining_date": "18-11-2024"
+    },
+    {
+        "id": "2043a58c",
+        "name": "neema",
+        "username": "neema123",
+        "user_email": "neema@gmail.com",
+        "password": "neema123",
+        "mobile": 8077414663,
+        "role": "customer",
+        "joining_date": "19-11-2024"
     }
 ]

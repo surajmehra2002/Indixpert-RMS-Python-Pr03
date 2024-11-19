@@ -1,0 +1,24 @@
+{
+    "order_id": "401-3593-4771",
+    "date": "2024-11-19",
+    "time": "01:48",
+    "customer_details": {
+        "customer_id": "00f2eb0c",
+        "name": "kailash123",
+        "email": "kailash@gmail.com",
+        "role": "customer"
+    },
+    "items": [
+        {
+            "name": "coffie",
+            "quantity": 41,
+            "price_per_unit": 70.0,
+            "total_price": 2870
+        }
+    ],
+    "sub_total": 2870,
+    "gst_amount": 516.6,
+    "grand_total": 3386,
+    "status": "delivered",
+    "payment_method": "UPI"
+}

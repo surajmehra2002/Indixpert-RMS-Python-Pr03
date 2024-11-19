@@ -1,0 +1,24 @@
+{
+    "order_id": "401-4647-8320",
+    "date": "2024-11-19",
+    "time": "08:42",
+    "customer_details": {
+        "customer_id": "00f2eb0c",
+        "name": "kailash123",
+        "email": "kailash@gmail.com",
+        "role": "customer"
+    },
+    "items": [
+        {
+            "name": "daal",
+            "quantity": 20,
+            "price_per_unit": 120.0,
+            "total_price": 2400
+        }
+    ],
+    "sub_total": 2400,
+    "gst_amount": 432.0,
+    "grand_total": 2832,
+    "status": "delivered",
+    "payment_method": "Cash"
+}

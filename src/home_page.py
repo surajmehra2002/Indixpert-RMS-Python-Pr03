@@ -13,8 +13,7 @@ def generate_id():
     
 
 def save_user(user_data):
-    auth.sign_up_autentication(user_data)
-   
+    auth.sign_up_authentication(user_data)
 
 def user_email():
     import re
