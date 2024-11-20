@@ -44,7 +44,7 @@ def user_name():
             break
     return username
 
-import maskpass
+import maskpass # type: ignore
 import re
 
 def user_password():
