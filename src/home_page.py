@@ -44,21 +44,42 @@ def user_name():
             break
     return username
 
+import maskpass
+import re
+
 def user_password():
     while True:
-        password = maskpass.askpass(prompt="Enter your password (min 6 characters): ", mask="*").strip()
+        password = maskpass.askpass(prompt="Enter your password (min 6 characters, must include a capital letter, small letter, number, and special character): ", mask="*").strip()
         
+        # Check if the password meets all the criteria
         if len(password) < 6:
             print("Password must be at least 6 characters long.")
             continue
         
-        confirm_password = maskpass.askpass(prompt="Confirm your password", mask="*").strip()
+        if not re.search(r"[A-Z]", password):
+            print("Password must include at least one uppercase letter.")
+            continue
+        
+        if not re.search(r"[a-z]", password):
+            print("Password must include at least one lowercase letter.")
+            continue
+        
+        if not re.search(r"\d", password):
+            print("Password must include at least one number.")
+            continue
+        
+        if not re.search(r"[!@#$%^&*(),.?\":{}|<>]", password):
+            print("Password must include at least one special character (!@#$%^&*(),.?\":{}|<>).")
+            continue
+        
+        confirm_password = maskpass.askpass(prompt="Confirm your password: ", mask="*").strip()
         
         if confirm_password != password:
             print("Passwords do not match. Please try again.")
             continue
         
         return password
+
 
 def user_mobile_no():
     while True:
