@@ -23,8 +23,8 @@ class AdminPanelModel:
     def user_managment_dashboard(self):
         print("\nUser Managment Dashboard")
         print("-" * 40)
-        print("1. View Users")
-        print("2. View Admin")
+        print("1. List of all Staff ")
+        print("2. List of Admins")
         print("3. View Blocked Users")
         print("4. Block user")
         print("5. Unblock user")

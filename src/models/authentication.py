@@ -26,7 +26,7 @@ def authenticate_user(username, password):
             if user["role"]=="admin":
                 return "admin" 
             else:
-                return "customer"
+                return "staff"
         else:
             print(Fore.RED +"Invalid credentials"+ Style.RESET_ALL)
 

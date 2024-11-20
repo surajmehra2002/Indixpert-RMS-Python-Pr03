@@ -279,7 +279,7 @@ class Order:
                             if cancellation_reason:
                                 # Update the status to "Canceled" and add the reason
                                 invoice['status'] = 'Canceled/Refunded'
-                                invoice['order_cancel_by'] = 'customer'
+                                invoice['order_cancel_by'] = 'staff'
                                 invoice['cancellation_reason'] = cancellation_reason
                                 
                                 # Write the updated invoice back to the file
@@ -348,7 +348,7 @@ class Order:
         print("="*50)
         print(f"Order ID: {order_id}")
         print(f"Date: {date} | Time: {time}")
-        print(f"Customer: {customer_name} ({customer_email})")
+        print(f"Staff: {customer_name} ({customer_email})")
         print(f"Payment Method: {payment_method}")
         print(f"Status: {status}")
         print("="*50)

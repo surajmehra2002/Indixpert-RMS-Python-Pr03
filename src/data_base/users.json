@@ -16,7 +16,7 @@
         "user_email": "manoj@gmail.com",
         "password": "manojsingh",
         "mobile": 9634377090,
-        "role": "customer",
+        "role": "staff",
         "joining_date": "07-11-2024"
     },
     {
@@ -26,7 +26,7 @@
         "user_email": "mohit@gmail.com",
         "password": "mohit123",
         "mobile": 9634912165,
-        "role": "customer",
+        "role": "staff",
         "joining_date": "11-11-2024",
         "blocked": "Violation of terms and conditions"
     },
@@ -37,7 +37,7 @@
         "user_email": "yogesh@gmail.com",
         "password": "yogesh",
         "mobile": 8937805123,
-        "role": "customer",
+        "role": "staff",
         "joining_date": "11-11-2024",
         "blocked": "Violation of terms and conditions"
     },
@@ -48,7 +48,7 @@
         "user_email": "nisha@gmail.com",
         "password": "nisha12",
         "mobile": 7830662013,
-        "role": "customer",
+        "role": "staff",
         "joining_date": "13-11-2024"
     },
     {
@@ -58,7 +58,7 @@
         "user_email": "kalpna@gmail.com",
         "password": "kalpna123",
         "mobile": 9999888877,
-        "role": "customer",
+        "role": "staff",
         "joining_date": "14-11-2024"
     },
     {
@@ -68,7 +68,7 @@
         "user_email": "kailash@gmail.com",
         "password": "kailash123",
         "mobile": 9999999999,
-        "role": "customer",
+        "role": "staff",
         "joining_date": "18-11-2024"
     },
     {
@@ -78,7 +78,7 @@
         "user_email": "neema@gmail.com",
         "password": "neema123",
         "mobile": 8077414663,
-        "role": "customer",
+        "role": "staff",
         "joining_date": "19-11-2024"
     }
 ]

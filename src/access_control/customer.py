@@ -22,6 +22,7 @@ class Customer:
             if choice == '1':
                 self.menu.display_menu()
                 
+                
             elif choice == '2':
                 self.order.take_order()
                 

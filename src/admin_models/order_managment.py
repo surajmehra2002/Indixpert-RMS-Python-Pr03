@@ -19,7 +19,7 @@ class Orders:
             # Display all orders for admin to choose from
             print("\n--- All Orders ---")
             for order in self.orders:
-                print(f"Order ID: {order['order_id']} | Customer: {order['customer_details']['name']} | Status: {order['status']}")
+                print(f"Order ID: {order['order_id']} | Staff: {order['customer_details']['name']} | Status: {order['status']}")
 
             # Prompt admin for order ID to cancel
             order_id = input("\nEnter the Order ID to cancel: ").strip()
@@ -41,7 +41,7 @@ class Orders:
 
             # Display predefined cancellation reasons
             predefined_reasons = [
-                "Customer request",
+                "Staff request",
                 "Item out of stock",
                 "Payment issue",
                 "Other"

@@ -1,4 +1,5 @@
 
+from colorama import Fore, Style # type: ignore
 
 
 from src.models.json_files_path import menu_update
@@ -90,7 +91,7 @@ class Menu:
                     if new_price_input.strip() == "":
                         break
                     try:
-                        new_price = float(new_price_input)  # Try to convert input to float
+                        new_price = int(new_price_input)  # Try to convert input to float
                         if new_price < 0:
                             print("Price cannot be negative. Please enter a valid price.")
                             continue
@@ -105,7 +106,7 @@ class Menu:
                         if half_price_input.strip() == "":
                             break
                         try:
-                            new_half_price = float(half_price_input)
+                            new_half_price = int(half_price_input)
                             if new_half_price < 0:
                                 print("Half price cannot be negative. Please enter a valid price.")
                                 continue
@@ -145,19 +146,19 @@ class Menu:
         categories = list({item['category'] for item in self.items if item['availability']})
 
         if len(self.items) > 0:        
-            print("\n===================  MENU  ====================")
+            print(Fore.GREEN+"\n===================  MENU  ===================="+Style.RESET_ALL)
 
             for category in categories:
-                print(f"\n\nCategory: {category}")
-                print("-" * 50)
-                print(f"{'Name':<25} {'Half':<15} {'Full':<25}")
-                print("-" * 50)
+                print(Fore.LIGHTMAGENTA_EX+ f"\n\n{category}"+Style.RESET_ALL)
+                print(Fore.GREEN+ "-" * 50+ Style.RESET_ALL)
+                print(Fore.GREEN+ f"{'Name':<25} {'Half':<15} {'Full':<25}"+Style.RESET_ALL)
+                print(Fore.GREEN+ "-" * 50+ Style.RESET_ALL)
 
                 for item in self.items:
                     # Only show the item if it is available
                     if item['category'] == category :
                         half_price = f"₹{item['half_price']}" if 'half_price' in item else '-'
-                        print(f"{item['name']:<25} {half_price:<15} ₹{item['price']:<25}")
+                        print(Fore.LIGHTGREEN_EX+ f"{item['name']:<25} {half_price:<15} ₹{item['price']:<25}"+Style.RESET_ALL)
 
         else:
             print("Menu item not available.")
@@ -201,7 +202,7 @@ class Menu:
             if has_half_price:
                 while True:
                     try:
-                        half_price = float(input("Enter half price: "))
+                        half_price = int(input("Enter half price: "))
                         break
                     except ValueError:
                         print("Invalid input for half price. Please enter a numeric value.")
@@ -212,9 +213,8 @@ class Menu:
             # Full price and availability inputs with validation
             while True:
                 try:
-                    price = float(input("Enter full price: "))
-                    availability_input = input("Is the item available? (yes/no): ").strip().lower()
-                    availability = availability_input == 'yes'
+                    price = int(input("Enter full price: "))
+                    availability = True
                     break
                 except ValueError:
                     print("Invalid input for price. Please enter numeric values.")

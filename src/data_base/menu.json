@@ -10,7 +10,7 @@
         "name": "Pepperoni Pizza",
         "category": "Pizza",
         "half_price": 550.0,
-        "price":800.0,
+        "price": 800.0,
         "availability": true
     },
     {
@@ -57,7 +57,6 @@
         "price": 13.0,
         "availability": true
     },
-    
     {
         "name": "paneer butter masala",
         "category": "main course",
@@ -126,5 +125,18 @@
         "price": 120.0,
         "availability": true,
         "half_price": 80.0
+    },
+    {
+        "name": "tawa roti",
+        "category": "breakfast",
+        "price": 6.0,
+        "availability": true
+    },
+    {
+        "name": "chicken biryani",
+        "category": "non veg",
+        "price": 140.0,
+        "availability": true,
+        "half_price": 70.0
     }
 ]

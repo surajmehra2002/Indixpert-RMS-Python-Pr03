@@ -17,7 +17,7 @@ def save_user(user_data):
 
 def user_email():
     import re
-    email = input("Enter customer Email: ").strip() 
+    email = input("Enter staff Email: ").strip() 
     email_regex = r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'
     if re.match(email_regex, email):
         return email
@@ -74,7 +74,7 @@ def user_mobile_no():
             print(Fore.RED +"Error: Invalid input. Please enter only digits." + Style.RESET_ALL)
 
 def user_role():
-    role = 'customer'
+    role = 'staff'
     return role
             
 
@@ -105,7 +105,7 @@ def login_users():
     
     
                 
-    if role == 'customer':
+    if role == 'staff':
                 has_user_block = auth.user_block(username)
                 user = auth.get_user_from_db(username)
                 if has_user_block:
