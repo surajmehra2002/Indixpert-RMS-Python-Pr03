@@ -120,13 +120,6 @@
         "availability": true
     },
     {
-        "name": "daal",
-        "category": "lunch",
-        "price": 120.0,
-        "availability": true,
-        "half_price": 80.0
-    },
-    {
         "name": "tawa roti",
         "category": "breakfast",
         "price": 6.0,

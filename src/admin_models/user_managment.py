@@ -129,13 +129,13 @@ class Users:
                 break
 
     def view_all_users(self):
-        print('Customer List')
+        print('Staff List')
         print('-' * 85)
         print(f"{'ID':<15} {'Username':<15} {'Mobile':<15} {'Joining Date':<15}")
         print("-" * 85)
         
         for user in self.users:
-            if user['role'] == 'customer':
+            if user['role'] == 'staff':
                 print(f"{user['id']:<15} {user['username']:<15} {user['mobile']:<15}  {user['joining_date']:<15}")
     
     def view_all_admins(self):

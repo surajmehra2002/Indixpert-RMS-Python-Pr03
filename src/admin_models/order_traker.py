@@ -1,3 +1,4 @@
+from colorama import Fore, Style # type: ignore
 
 from src.models.json_files_path import load_tracker
 def analytical():
@@ -17,8 +18,8 @@ def analytical():
         total_orders = sum(order_status.values())
 
         # Insights
-        print("\nBusiness Analytics Report")
-        print("-------------------------------------")
+        print(Fore.LIGHTGREEN_EX+"\nBusiness Analytics Report")
+        print("-------------------------------------"+ Style.RESET_ALL)
         print(f"{'Total Revenue:':<20} ₹{total_revenue:,.2f}")
         print(f"{'Total Refunds:':<20} ₹{total_refunds:,.2f}")
         print(f"{'Total Orders:':<20} {total_orders}")
@@ -39,9 +40,9 @@ def analytical():
         # Business Trend
         print("\n--- Business Trend ---")
         if refund_percentage < 5 and completion_rate > 90:
-            print("Business is performing well with minimal refunds and high order completion.")
+            print(Fore.GREEN+"Business is performing well with minimal refunds and high order completion."+ Style.RESET_ALL)
         elif refund_percentage > 10:
-            print("Refund percentage is high. Consider reviewing your refund policy or product quality.")
+            print(Fore.RED+"Refund percentage is high. Consider reviewing your refund policy or product quality."+ Style.RESET_ALL)
         elif completion_rate < 70:
             print("Low order completion rate. Improve customer experience or address order fulfillment issues.")
         else:
