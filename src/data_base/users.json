@@ -80,5 +80,15 @@
         "mobile": 8077414663,
         "role": "staff",
         "joining_date": "19-11-2024"
+    },
+    {
+        "id": "b61e6751",
+        "name": "nitesh",
+        "username": "nitesh123",
+        "user_email": "nitesh@gmail.com",
+        "password": "@Netesh123",
+        "mobile": 9876543210,
+        "role": "staff",
+        "joining_date": "21-11-2024"
     }
 ]

@@ -1,0 +1,41 @@
+{
+    "order_id": "401-4696-3575",
+    "date": "2024-11-21",
+    "time": "07:00",
+    "customer_details": {
+        "customer_id": "b61e6751",
+        "name": "nitesh123",
+        "email": "nitesh@gmail.com",
+        "role": "staff"
+    },
+    "items": [
+        {
+            "name": "kadhai paneer",
+            "quantity": 1,
+            "price_per_unit": 180.0,
+            "total_price": 180
+        },
+        {
+            "name": "butter roti",
+            "quantity": 5,
+            "price_per_unit": 13.0,
+            "total_price": 65
+        },
+        {
+            "name": "water",
+            "quantity": 1,
+            "price_per_unit": 20.0,
+            "total_price": 20
+        }
+    ],
+    "sub_total": 265,
+    "gst_amount": 47.699999999999996,
+    "grand_total": 312,
+    "status": "Canceled/Refunded",
+    "payment_method": "Card",
+    "payment_status": "Credited",
+    "order_cancel_by": "staff",
+    "canceled_date" : "2024-11-21",
+    "canceled_time" : "08:01",
+    "cancellation_reason": "Ordered by mistake"
+}

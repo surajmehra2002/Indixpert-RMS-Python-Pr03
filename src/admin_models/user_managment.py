@@ -1,3 +1,6 @@
+
+from colorama import Fore, Style # type: ignore
+
 from src.models.json_files_path import load_users
 from src.models.json_files_path import save_user_when_signup
 
@@ -129,36 +132,36 @@ class Users:
                 break
 
     def view_all_users(self):
-        print('Staff List')
-        print('-' * 85)
+        print(Fore.LIGHTGREEN_EX + 'Staff List'+Style.RESET_ALL)
+        print(Fore.GREEN + '-' * 85 )
         print(f"{'ID':<15} {'Username':<15} {'Mobile':<15} {'Joining Date':<15}")
-        print("-" * 85)
+        print("-" * 85 + Style.RESET_ALL)
         
         for user in self.users:
             if user['role'] == 'staff':
-                print(f"{user['id']:<15} {user['username']:<15} {user['mobile']:<15}  {user['joining_date']:<15}")
+                print(Fore.YELLOW + f"{user['id']:<15} {user['username']:<15} {user['mobile']:<15}  {user['joining_date']:<15}" + Style.RESET_ALL)
     
     def view_all_admins(self):
-        print('Admin List')
-        print('-' * 85)
+        print(Fore.GREEN + 'Admin List' + Style.RESET_ALL)
+        print(Fore.LIGHTGREEN_EX + '-' * 85)
         print(f"{'ID':<15} {'Username':<15} {'Mobile':<15} {'Joining Date':<15}")
-        print("-" * 85)
+        print("-" * 85 + Style.RESET_ALL)
         for user in self.users:
             if user['role'] == 'admin':
-                print(f"{user['id']:<15} {user['username']:<15} {user['mobile']:<15}  {user['joining_date']:<15}")
+                print(Fore.YELLOW + f"{user['id']:<15} {user['username']:<15} {user['mobile']:<15}  {user['joining_date']:<15}" + Style.RESET_ALL)
         
 
 
     def view_block_users(self):
-        print('Block Users List')
-        print('-' * 85)
+        print(Fore.LIGHTGREEN_EX +'Block Users List' + Style.RESET_ALL)
+        print(Fore.GREEN + '-' * 85)
         print(f"{'ID':<15} {'Username':<15} {'Mobile':<15} {'Joining Date':<15} {'Block reason':<50}")
-        print("-" * 85)
+        print("-" * 85  + Style.RESET_ALL)
         found = False
         for user in self.users:
             if "blocked" in user:
                 found = True
-                print(f"{user['id']:<15} {user['username']:<15} {user['mobile']:<15}  {user['joining_date']:<15} {user['blocked']:<50}")
+                print(Fore.YELLOW + f"{user['id']:<15} {user['username']:<15} {user['mobile']:<15}  {user['joining_date']:<15} {user['blocked']:<50}" + Style.RESET_ALL)
         if not found:
             print("Nothing blocked users yet! ") 
         
@@ -183,7 +186,7 @@ class Users:
                 print("Block action canceled.")
                 return None  # Indicate cancellation
             else:
-                print("Invalid input. Please select a reason number (1-5).")
+                print(Fore.RED + "Invalid input. Please select a reason number (1-5)." + Style.RESET_ALL)
 
 
     def block_user(self):
@@ -221,11 +224,11 @@ class Users:
                     confirm = input(f"Are you sure you want to block this user for '{reason}'? (yes/no): ").strip().lower()
                     if confirm == 'yes':
                         user["blocked"] = reason
-                        print(f"User '{user['username']}' has been blocked for the following reason: {reason}")
+                        print(Fore.GREEN + f"User '{user['username']}' has been blocked for the following reason: {reason}" + Style.RESET_ALL)
                     else:
                         print("User blocking process canceled.")
             else:
-                print("You don't have access to block an admin!")
+                print(Fore.RED + "You don't have access to block an admin!" + Style.RESET_ALL)
         
         save_user_when_signup(self.users)
 
@@ -249,7 +252,7 @@ class Users:
                     # Remove the 'blocked' key to unblock the user
                     del user["blocked"]
                     save_user_when_signup(self.users)
-                    print(f"User '{user['username']}' has been unblocked successfully.")
+                    print(Fore.GREEN + f"User '{user['username']}' has been unblocked successfully." + Style.RESET_ALL)
                 else:
                     print(f"User '{user['username']}' is not blocked.")
                 return

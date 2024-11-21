@@ -2,6 +2,7 @@ import json
 import os
 import random
 from datetime import datetime
+from colorama import Fore, Style # type: ignore
 from tabulate import tabulate # type: ignore
 
 from src.models.json_files_path import load_menu
@@ -52,7 +53,7 @@ class Order:
                     add_more = 'y'  # Reset add_more to continue ordering
                     continue
                 else:
-                    print("Invalid input. Please type 'y' or 'n'.")
+                    print(Fore.RED+"Invalid input. Please type 'y' or 'n'."+Style.RESET_ALL)
                     continue
 
             order_name = input("Search item for order (press 0 for exit): ").strip().lower()
@@ -61,29 +62,29 @@ class Order:
             if order_name == '0':
                 break
             if not ordered_items:
-                print("Item not available. Please select an item from the available menu.\n")
+                print(Fore.YELLOW+"Item not available. Please select an item from the available menu.\n"+Style.RESET_ALL)
                 continue
 
             print("Searching...", end="")
             loading()
-            print("\n\nAvailable items: ")
-            print('-' * 65)
+            print(Fore.GREEN+"\n\nAvailable items: "+Style.RESET_ALL)
+            print(Fore.LIGHTYELLOW_EX+'-' * 65)
             print(f"{'Index':<10} {'Name':<35} {'Half':<10}  {'Full'}")
-            print('-' * 65)
+            print('-' * 65 + Style.RESET_ALL)
 
             for index, item in enumerate(ordered_items, start=1):
                 half_price = f"₹{item['half_price']}" if 'half_price' in item else ''
-                print(f"{index:<10} {item['name']:<35} {half_price:<10} ₹{item['price']}")
+                print(Fore.GREEN+ f"{index:<10} {item['name']:<35} {half_price:<10} ₹{item['price']}"+Style.RESET_ALL)
 
             if len(ordered_items) > 1:
                 try:
                     chosen_index = int(input("\nMultiple items found. Enter the index number of the item you want: ")) - 1
                     if chosen_index < 0 or chosen_index >= len(ordered_items):
-                        print("Invalid index. Please try again.")
+                        print(Fore.RED+ "Invalid index. Please try again."+ Style.RESET_ALL)
                         continue
                     selected_item = ordered_items[chosen_index]
                 except ValueError:
-                    print("Invalid input. Please enter a number.")
+                    print(Fore.RED+ "Invalid input. Please enter a number."+ Style.RESET_ALL)
                     continue
             else:
                 selected_item = ordered_items[0]
@@ -97,7 +98,7 @@ class Order:
                 if confirm == 'y' or confirm == 'n':
                     break
                 else:
-                    print('Invalid input! ')
+                    print(Fore.RED+ 'Invalid input! ' + Style.RESET_ALL)
             if confirm != 'y':
                 continue
 
@@ -110,7 +111,7 @@ class Order:
                         elif order_type_choice == "2":
                             return "full"
                         else:
-                            print("Invalid choice. Order canceled.")
+                            print("Invalid choice !")
                 order_size = order_type()
             else:
                 order_size = "full"
@@ -119,11 +120,11 @@ class Order:
                 try:
                     quantity = int(input("Enter quantity: "))
                     if quantity <= 0:
-                        print("Quantity must be a positive number.")
+                        print(Fore.RED + "Quantity must be a positive number."+ Style.RESET_ALL)
                         continue
                     break
                 except ValueError:
-                    print("Invalid input! Please enter a numeric value.")
+                    print(Fore.RED + "Invalid input! Please enter a numeric value." + Style.RESET_ALL)
 
             # Determine the base price based on order type
             def base_price():
@@ -156,15 +157,23 @@ class Order:
                 if add_more == 'y' or add_more == 'n':
                     break  # Exit the loop if the input is either 'y' or 'n'
                 else:
-                    print("Invalid input! Please enter 'y' for yes or 'n' for no.")
+                    print(Fore.RED + "Invalid input! Please enter 'y' for yes or 'n' for no." + Style.RESET_ALL)
 
         if items:  # Ensure there are items to process
             sub_total = sum(item['total_price'] for item in items)
             gst_amount = (sub_total * self.gst_rate)
             grand_total = sub_total + int(gst_amount)
 
-            print(f"The total price including GST is: ₹{grand_total:.2f}")
-            confirmation = input("Are you sure you want to place the order? (Y/N): ")
+            print(f"The total price including GST is: {Fore.GREEN}₹{grand_total:.2f}{Style.RESET_ALL}")
+
+            while True:
+                confirmation = input("Are you sure you want to place the order? (Y/N): ")
+                if confirmation.upper()=='Y' or confirmation.upper()=='N':
+                    break
+                
+                else:
+                    print(Fore.RED + 'Invalid input !' + Style.RESET_ALL)
+                    
 
             if confirmation.upper() == 'Y':
                 order_id = self.generate_invoice_id()
@@ -187,6 +196,7 @@ class Order:
                     "gst_amount": gst_amount,
                     "grand_total": grand_total,
                     "status": "Order Placed",
+                    "payment_status" : "Debited",
                     "payment_method": self.payment_method()
                 }
 
@@ -204,9 +214,9 @@ class Order:
                 
 
                 print(f"SMS: You have paid ₹{grand_total:.2f} including GST.")
-                print("Order placed successfully!")
+                print(Fore.GREEN + "Congratulation! your order placed successfully" + Style.RESET_ALL)
             else:
-                print("Order cancelled.")
+                print(Fore.RED + "Order cancelled." + Style.RESET_ALL)
 
   
 
@@ -279,7 +289,10 @@ class Order:
                             if cancellation_reason:
                                 # Update the status to "Canceled" and add the reason
                                 invoice['status'] = 'Canceled/Refunded'
+                                invoice['payment_status'] = 'Credited'
                                 invoice['order_cancel_by'] = 'staff'
+                                invoice['canceled_date'] = datetime.now().strftime('%Y-%m-%d')
+                                invoice['canceled_time'] = datetime.now().strftime('%H:%M')
                                 invoice['cancellation_reason'] = cancellation_reason
                                 
                                 # Write the updated invoice back to the file
@@ -309,10 +322,13 @@ class Order:
         invoices_list = load_all_invoices_of_an_user(directory)
         
         if len(invoices_list)!=0:
-            print(f"{"Payment Mode":<20} {"Order ID":<40} {"Date & Time":<25} {"Totle Payment"}")
-            print("-"*110)
+            print(Fore.GREEN + f"{"Payment Mode":<20} {"Payment Status":<40} {"Date & Time":<25} {"Totle Payment"}")
+            print("-"*110 +Style.RESET_ALL)
             for invoice in invoices_list:
-                print(f"{invoice['payment_method']:<20} {invoice['order_id']:<40} {invoice['date']}, {invoice['time']:<25} {invoice['grand_total']}")
+                print( Fore.LIGHTYELLOW_EX + f"{invoice['payment_method']:<20} {'Debited':<40} {invoice['date']}, {invoice['time']:<15} -{invoice['grand_total']}" + Style.RESET_ALL)
+                if invoice['status'] == 'Canceled/Refunded':
+                    print( Fore.LIGHTYELLOW_EX + f"{invoice['payment_method']:<20} {'Credited':<40} {invoice['canceled_date']}, {invoice['canceled_time']:<15} +{invoice['grand_total']}" + Style.RESET_ALL)
+
         else:
             print("No payment yet!")  
 
@@ -376,6 +392,6 @@ class Order:
                 order_found = True
                 self.generate_invoice(invoice)
         if not order_found:
-            print("ERROR: Invalid order id! ")
+            print(Fore.RED + "ERROR: Invalid order id! " + Style.RESET_ALL)
                 
 

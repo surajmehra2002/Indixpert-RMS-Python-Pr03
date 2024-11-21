@@ -1,4 +1,7 @@
 import os,json
+from colorama import Fore, Style # type: ignore
+
+
 
 from src.models.json_files_path import get_all_invoices
 from src.models.json_files_path import load_tracker
@@ -53,7 +56,7 @@ class Orders:
             # Prompt for reason
             reason_choice = int(input("Select a reason for cancellation (1-4): "))
             if reason_choice < 1 or reason_choice > 4:
-                print("Invalid choice. Cancellation aborted.")
+                print(Fore.RED + "Invalid choice. Cancellation aborted."+ Style.RESET_ALL)
                 return
 
             cancellation_reason = predefined_reasons[reason_choice - 1]
@@ -76,7 +79,7 @@ class Orders:
             data[0]["order_status"]["Order Placed"] -= 1
             tracker_update(data)
 
-            print(f"Order {order_id} has been successfully canceled.")
+            print(Fore.GREEN + f"Order {order_id} has been successfully canceled." + Style.RESET_ALL)
 
         except ValueError:
             print("Invalid input. Please try again.")
@@ -91,10 +94,10 @@ class Orders:
                 found = True
                 break
         if found:
-            print(f"\n{'Order ID':<20}{'Ordered By':<25}{'Order date':<15}{'Payment method':<20}{'Status'}")            
+            print(Fore.GREEN + f"\n{'Order ID':<20}{'Ordered By':<25}{'Order date':<15}{'Payment method':<20}{'Status'}"+Style.RESET_ALL)            
             for order in self.orders:
                 if order['status']=='Order Placed':
-                    print(f"{order['order_id']:<20}{order['customer_details']['email']:<25}{order['date']:<15}{order['payment_method']:<20}{order['status']}")
+                    print(Fore.LIGHTYELLOW_EX + f"{order['order_id']:<20}{order['customer_details']['email']:<25}{order['date']:<15}{order['payment_method']:<20}{order['status']}" + Style.RESET_ALL)
         else:
             print("No orders placed yet!")
 
@@ -105,10 +108,11 @@ class Orders:
                 found = True
                 break
         if found:
-            print(f"\n{'Order ID':<20}{'Ordered By':<25}{'Order date':<15}{'Payment method':<20}{'Status'}")            
+        
+            print(Fore.GREEN + f"\n{'Order ID':<20}{'Ordered By':<25}{'Order date':<15}{'Payment method':<20}{'Status'}" + Style.RESET_ALL)            
             for order in self.orders:
                 if order['status']=='delivered':
-                    print(f"{order['order_id']:<20}{order['customer_details']['email']:<25}{order['date']:<15}{order['payment_method']:<20}{order['status']}")
+                    print(Fore.LIGHTYELLOW_EX + f"{order['order_id']:<20}{order['customer_details']['email']:<25}{order['date']:<15}{order['payment_method']:<20}{order['status']}" + Style.RESET_ALL)
         else:
             print("No orders delievered yet!")
     def deliver_order(self):

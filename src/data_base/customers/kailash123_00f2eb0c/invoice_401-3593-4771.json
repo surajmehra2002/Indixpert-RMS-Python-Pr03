@@ -19,6 +19,7 @@
     "sub_total": 2870,
     "gst_amount": 516.6,
     "grand_total": 3386,
+    "payment_status" : "Debited",
     "status": "delivered",
     "payment_method": "UPI"
 }

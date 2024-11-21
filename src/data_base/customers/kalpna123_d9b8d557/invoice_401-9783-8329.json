@@ -32,7 +32,10 @@
     "gst_amount": 235.79999999999998,
     "grand_total": 1545,
     "status": "Canceled/Refunded",
+    "payment_status": "Credited",
     "payment_method": "Card",
+    "canceled_date" : "2024-11-21",
+    "canceled_time" : "08:01",
     "order_cancel_by": "admin",
     "cancellation_reason": "Customer request"
 }

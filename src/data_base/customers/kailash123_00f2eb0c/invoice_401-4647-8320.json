@@ -20,5 +20,6 @@
     "gst_amount": 432.0,
     "grand_total": 2832,
     "status": "delivered",
+    "payment_status" : "Debited",
     "payment_method": "Cash"
 }

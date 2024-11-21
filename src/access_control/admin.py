@@ -4,9 +4,10 @@ from src.packages.menu_management.menu import Menu
 from src.admin_models.user_managment import Users
 from src.admin_models.order_managment import Orders
 from src.admin_models.admin_panel_model import AdminPanelModel
+from src.admin_models.business_analysis import Analysis
 
 # function(module)
-from src.admin_models.order_traker import analytical
+# from src.admin_models.order_traker import analytical
 
 
 class Admin:
@@ -15,6 +16,7 @@ class Admin:
         self.menu = Menu() # class object 
         self.users = Users()
         self.orders = Orders()
+        self.analization = Analysis()
         self.panel = AdminPanelModel()
 
     def run_admin_panel(self):
@@ -22,7 +24,7 @@ class Admin:
             self.panel.display_dashboard()
             choice = input("Enter your choice: ")
             if choice == '1':
-                analytical()
+                self.analysis_business()
                 input("Press 'Enter' to show the Dashboard")
             elif choice == '2':
                 self.menu_managment()
@@ -45,7 +47,23 @@ class Admin:
                 print("Invalid choice. Please try again.")
 
 
-  
+    def analysis_business(self):
+        while True:
+            self.panel.analysis_dashboard()
+            choice = input("Enter your choice: ")
+            if choice == '1':
+                self.analization.analytical()
+                input("Press 'Enter' to show the Dashboard")
+                
+            elif choice == '2':
+                self.analization.filter_analysis()
+                input("Press 'Enter' to show the Dashboard")
+
+            elif choice == '0':
+                break
+            else:
+                print("Invalid choice. Please try again")
+
 
     def menu_managment(self):
         while True:
