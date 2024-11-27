@@ -32,6 +32,11 @@ def user_first_name():
             else:
                 print("first name can't empty")
     return first_name
+
+def user_last_name():    
+        last_name = input("Enter last name (Optional): ").strip()
+        return last_name
+
 def user_name():
     while True:
         username = input("Enter your username: ").strip()
@@ -75,7 +80,7 @@ def user_password():
         confirm_password = maskpass.askpass(prompt="Confirm your password: ", mask="*").strip()
         
         if confirm_password != password:
-            print("Passwords do not match. Please try again.")
+            print(Fore.RED + "Passwords do not match. Please try again." + Style.RESET_ALL)
             continue
         
         return password
@@ -101,11 +106,12 @@ def user_role():
 
 
 def create_customer_user():
-    print("Creating a new user.")
+    print(Fore.LIGHTBLUE_EX + "\nCreating a new user....." + Style.RESET_ALL)
 
     customer_user = {
         "id": generate_id(),
         "name":user_first_name(),
+        "last_name":user_last_name(),
         "username": user_name(),
         "user_email": user_email(),
         "password": user_password(),

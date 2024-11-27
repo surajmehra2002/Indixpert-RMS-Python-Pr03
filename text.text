@@ -1,3 +1,0 @@
-from colorama import Fore, Style # type: ignore
-Fore.GREEN
-Style.RESET_ALL

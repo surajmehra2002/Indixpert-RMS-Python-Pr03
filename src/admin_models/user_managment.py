@@ -211,7 +211,7 @@ class Users:
         
         user = next((user for user in self.users if user["id"] == user_id), None)
         if user:
-            if user["role"] == "customer":
+            if user["role"] == "staff":
                 if "blocked" in user:
                     print(f"User is already blocked. Reason: {user['blocked']}")
                 else:

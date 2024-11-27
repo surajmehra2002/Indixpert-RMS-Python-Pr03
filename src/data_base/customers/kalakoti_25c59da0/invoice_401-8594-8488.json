@@ -1,0 +1,44 @@
+{
+    "order_id": "401-8594-8488",
+    "date": "2024-11-21",
+    "time": "15:50",
+    "customer_details": {
+        "customer_id": "25c59da0",
+        "name": "kalakoti",
+        "email": "nisha@gmail.com",
+        "role": "staff"
+    },
+    "items": [
+        {
+            "name": "chicken biryani",
+            "quantity": 5,
+            "price_per_unit": 70.0,
+            "total_price": 350,
+            "type": "half"
+        },
+        {
+            "name": "water",
+            "quantity": 5,
+            "price_per_unit": 20.0,
+            "total_price": 100
+        },
+        {
+            "name": "hot chocolate",
+            "quantity": 5,
+            "price_per_unit": 180.0,
+            "total_price": 900
+        },
+        {
+            "name": "aalo pratha",
+            "quantity": 5,
+            "price_per_unit": 60.0,
+            "total_price": 300
+        }
+    ],
+    "sub_total": 1650,
+    "gst_amount": 297.0,
+    "grand_total": 1947,
+    "status": "delivered",
+    "payment_status": "Debited",
+    "payment_method": "Card"
+}

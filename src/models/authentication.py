@@ -64,4 +64,4 @@ def sign_up_authentication(user_data):
         # Add user and save to database
         users.append(user_data)
         save_user_when_signup(users)
-        print(f"Successfully created {user_data['role']} account!")
+        print(Fore.GREEN + f"Successfully created {user_data['role']} account!" + Style.RESET_ALL)

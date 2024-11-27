@@ -90,5 +90,26 @@
         "mobile": 9876543210,
         "role": "staff",
         "joining_date": "21-11-2024"
+    },
+    {
+        "id": "600baf93",
+        "name": "yogi",
+        "username": "yogi123",
+        "user_email": "yogi@gmail.com",
+        "password": "@Yogi123",
+        "mobile": 6464646464,
+        "role": "staff",
+        "joining_date": "22-11-2024"
+    },
+    {
+        "id": "6b0df4ed",
+        "name": "suraj",
+        "last_name": "",
+        "username": "suraj1234",
+        "user_email": "suraj123@gmail.com",
+        "password": "@Surajsingh123",
+        "mobile": 9898989887,
+        "role": "staff",
+        "joining_date": "22-11-2024"
     }
 ]

@@ -1,0 +1,25 @@
+{
+    "order_id": "401-9220-7243",
+    "date": "2024-11-22",
+    "time": "18:42",
+    "customer_details": {
+        "customer_id": "6b0df4ed",
+        "name": "suraj1234",
+        "email": "suraj123@gmail.com",
+        "role": "staff"
+    },
+    "items": [
+        {
+            "name": "kadhai paneer",
+            "quantity": 12,
+            "price_per_unit": 180.0,
+            "total_price": 2160
+        }
+    ],
+    "sub_total": 2160,
+    "gst_amount": 388.8,
+    "grand_total": 2548,
+    "status": "delivered",
+    "payment_status": "Debited",
+    "payment_method": "Net Banking"
+}

@@ -1,0 +1,25 @@
+{
+    "order_id": "401-7446-4858",
+    "date": "2024-11-22",
+    "time": "12:36",
+    "customer_details": {
+        "customer_id": "00f2eb0c",
+        "name": "kailash123",
+        "email": "kailash@gmail.com",
+        "role": "staff"
+    },
+    "items": [
+        {
+            "name": "BBQ Chicken Pizza",
+            "quantity": 2,
+            "price_per_unit": 1100.0,
+            "total_price": 2200
+        }
+    ],
+    "sub_total": 2200,
+    "gst_amount": 396.0,
+    "grand_total": 2596,
+    "status": "Order Placed",
+    "payment_status": "Debited",
+    "payment_method": "Card"
+}

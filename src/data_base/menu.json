@@ -82,12 +82,6 @@
         "availability": true
     },
     {
-        "name": "kadhai paneer",
-        "category": "main course",
-        "price": 180.0,
-        "availability": true
-    },
-    {
         "name": "dosa",
         "category": "breakfast",
         "price": 100.0,
@@ -131,5 +125,12 @@
         "price": 140.0,
         "availability": true,
         "half_price": 70.0
+    },
+    {
+        "name": "kdayi paneer",
+        "category": "main course",
+        "price": 120,
+        "availability": true,
+        "half_price": 70
     }
 ]
